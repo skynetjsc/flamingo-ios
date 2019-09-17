@@ -1,0 +1,116 @@
+PODS:
+  - Alamofire (4.8.2)
+  - BiometricAuthentication (3.0)
+  - Cosmos (19.0.3)
+  - ESTabBarController-swift (2.7)
+  - FacebookCore (0.8.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.8.0):
+    - FacebookCore (~> 0.8.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
+  - FacebookShare (0.8.0):
+    - FacebookCore (~> 0.8.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKShareKit (~> 5.0)
+  - FBSDKCoreKit (5.3.0):
+    - FBSDKCoreKit/Basics (= 5.3.0)
+    - FBSDKCoreKit/Core (= 5.3.0)
+  - FBSDKCoreKit/Basics (5.3.0)
+  - FBSDKCoreKit/Core (5.3.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.3.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FBSDKShareKit (5.3.0):
+    - FBSDKCoreKit (~> 5.0)
+  - GoogleMaps (3.3.0):
+    - GoogleMaps/Maps (= 3.3.0)
+  - GoogleMaps/Base (3.3.0)
+  - GoogleMaps/Maps (3.3.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.3.0):
+    - GoogleMaps/Base (= 3.3.0)
+  - GoogleSignIn (4.4.0):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.2.1):
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - GoogleToolboxForMac/Defines (2.2.1)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.1)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.1)
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.1)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.1)"
+  - GTMSessionFetcher/Core (1.2.2)
+  - Koyomi (1.2.7)
+  - MarqueeLabel (4.0.0)
+  - SideMenuSwift (2.0.1)
+  - SwiftyJSON (4.3.0)
+  - VisualEffectView (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.8.1)
+  - BiometricAuthentication
+  - Cosmos (~> 19.0)
+  - ESTabBarController-swift
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
+  - GoogleMaps
+  - GooglePlaces
+  - GoogleSignIn
+  - Koyomi
+  - MarqueeLabel
+  - SideMenuSwift
+  - SwiftyJSON (~> 4.0)
+  - VisualEffectView
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - BiometricAuthentication
+    - Cosmos
+    - ESTabBarController-swift
+    - FacebookCore
+    - FacebookLogin
+    - FacebookShare
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
+    - GoogleMaps
+    - GooglePlaces
+    - GoogleSignIn
+    - GoogleToolboxForMac
+    - GTMSessionFetcher
+    - Koyomi
+    - MarqueeLabel
+    - SideMenuSwift
+    - SwiftyJSON
+    - VisualEffectView
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  BiometricAuthentication: e39b1a55040d679d5dbc4fa90d76e067c432de7f
+  Cosmos: a6fb17284281fa12cf4c85c2efecd440a215ec44
+  ESTabBarController-swift: 4fb52ad03d94d0717ef97bc9eb09a5abfdded0a2
+  FacebookCore: 563bb4cbcd7dd86cf89f3729252140bf256aacaa
+  FacebookLogin: 8b966ae661e95e7dba837d7cc49cc464ce003dba
+  FacebookShare: e75d5e81ef7bd7aab2f865446c4c27015b43bae6
+  FBSDKCoreKit: 39748deefe37a005f983722e433be2ddcdd83ae7
+  FBSDKLoginKit: bc0329e10045789e8d40b12d4f15ddbd07a898e2
+  FBSDKShareKit: f61d03f36ce4f1b379c7de7dbfe173662e68be44
+  GoogleMaps: cfee83da305b9aaeccf92c24ac79df11c3003492
+  GooglePlaces: 1e2a87bd9efee9623ee65d44ecc35ebfecd7b13c
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
+  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  Koyomi: f03615b8d2bb5a5a4752c6404a9794ed7ef7b327
+  MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
+  SideMenuSwift: 588374781f2508f551a41796482290aeff1afd78
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  VisualEffectView: 9e9883f07d8a929b98c9c08a068f726279d92754
+
+PODFILE CHECKSUM: e27565be387c578af5a3e1e52f387a67b0af6e08
+
+COCOAPODS: 1.6.1
