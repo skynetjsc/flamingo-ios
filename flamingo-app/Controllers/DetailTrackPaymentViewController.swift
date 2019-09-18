@@ -22,6 +22,7 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var Adult: UILabel!
     @IBOutlet weak var Child: UILabel!
     @IBOutlet weak var Description: UILabel!
+    @IBOutlet weak var note: UILabel!
     
     @IBOutlet weak var GrandTotal: UILabel!
     @IBOutlet weak var CheckOutDate: UILabel!
@@ -337,7 +338,7 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
                         //                            self.listPictures = listPicture
                         //
                         //                        }
-                        
+                        self.note.text = "\(String(describing: response["Data"]!["Condition"]!!))\n \(String(describing: response["Data"]!["Notes"]!!))"
                         if let listUtilities = response["Data"]!["ListUtilities"] as? [[String: Any]] {
                             self.ListUtilities = listUtilities
                         }

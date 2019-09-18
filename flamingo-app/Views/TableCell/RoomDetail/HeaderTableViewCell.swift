@@ -81,6 +81,7 @@ class HeaderTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PictureCollectionViewCell", for: indexPath) as! PictureCollectionViewCell
+            print(self.dataListPictures[indexPath.row]["Picture"] as? String)
             cell.imagePicture.downloaded(from: (self.dataListPictures[indexPath.row]["Picture"] as? String)!)
             cell.imagePicture.contentMode = .scaleAspectFill
             return cell

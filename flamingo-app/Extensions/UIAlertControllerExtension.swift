@@ -26,7 +26,7 @@
 import Foundation
 import UIKit
 
-let CancelTitle     =   "Cancel"
+let CancelTitle     =   "Huỷ"
 let OKTitle         =   "OK"
 typealias AlertViewController = UIAlertController
 

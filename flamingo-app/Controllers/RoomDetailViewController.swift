@@ -46,7 +46,7 @@ class RoomDetailViewController: BaseViewController {
     @IBOutlet weak var incrementChild: UIButton!
     @IBOutlet weak var decrementChild: UIButton!
     @IBOutlet weak var txtChild: UILabel!
-    @IBOutlet weak var segementedChosseDate: UISegmentedControl!
+//    @IBOutlet weak var segementedChosseDate: UISegmentedControl!
     
     var valStartFormatDate: Date?
     var valEndFormatDate: Date?
@@ -881,7 +881,7 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     // Tableview Methods
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 930
+        return 1100
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -900,7 +900,7 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
             numberFormatter.locale = Locale(identifier: "vi_VN")
             cell.priceItem.text = numberFormatter.string(from: NSNumber(value: self.infoDetailRoom!["Price"] as! Double))!
             cell.sizeItem.text =  "\(self.infoDetailRoom!["Size"] as! String) (bao gồm khuôn viên Villa)"
-            cell.noteItem.text = self.infoDetailRoom!["Notes"] as? String
+            cell.noteItem.text = "\(self.infoDetailRoom!["Condition"]!)\n \(self.infoDetailRoom!["Notes"]!)"
             cell.desc.text = self.infoDetailRoom!["Description"] as? String
             cell.reviewItem.rating = self.infoDetailRoom!["StarNum"] as! Double
 //            let countVote = "\(String(describing: self.infoDetailRoom!["AverageVote"]!))"

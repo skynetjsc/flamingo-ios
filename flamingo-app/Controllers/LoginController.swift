@@ -340,9 +340,9 @@ extension LoginController {
     }
     
     func showGotoSettingsAlert(message: String) {
-        let settingsAction = AlertAction(title: "Go to settings")
+        let settingsAction = AlertAction(title: "Đi tới cài đặt")
         
-        let alertController = getAlertViewController(type: .alert, with: "Error", message: message, actions: [settingsAction], showCancel: true, actionHandler: { (buttonText) in
+        let alertController = getAlertViewController(type: .alert, with: "Lỗi xác thực", message: "Lỗi xác thực vân tay vui lòng kiểm tra lại cài đặt", actions: [settingsAction], showCancel: true, actionHandler: { (buttonText) in
             if buttonText == CancelTitle { return }
             
             // open settings

@@ -9080,7 +9080,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="scrollableAxes" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="930" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qcs-jJ-gC9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="scrollableAxes" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="1050" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qcs-jJ-gC9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="tY0-du-Wal">
@@ -9191,24 +9191,24 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderTableViewCell" rowHeight="930" id="aEE-Kb-CAr" customClass="HeaderTableViewCell" customModule="flamingo_app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="448" width="375" height="930"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderTableViewCell" rowHeight="1050" id="aEE-Kb-CAr" customClass="HeaderTableViewCell" customModule="flamingo_app" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="448" width="375" height="1050"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aEE-Kb-CAr" id="dds-a1-1j7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="930"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1050"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KP9-uF-1zd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="336" height="930"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1050"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTp-Ya-hKj">
-                                                            <rect key="frame" x="8" y="8" width="154" height="0.0"/>
+                                                            <rect key="frame" x="8" y="8" width="193" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3,740,000đ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObG-fY-4YN">
-                                                            <rect key="frame" x="170" y="8" width="150" height="26"/>
+                                                            <rect key="frame" x="209" y="8" width="150" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="Iq6-cF-7MD"/>
                                                             </constraints>
@@ -9239,7 +9239,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Bt-Qp-azS">
-                                                            <rect key="frame" x="8" y="42" width="320" height="15"/>
+                                                            <rect key="frame" x="8" y="42" width="359" height="15"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="FMI-5m-IGW">
                                                                     <rect key="frame" x="0.0" y="2.6666666666666643" width="8" height="10"/>
@@ -9249,7 +9249,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 km từ trung tâm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JE-b3-69n">
-                                                                    <rect key="frame" x="12" y="0.0" width="308" height="15"/>
+                                                                    <rect key="frame" x="12" y="0.0" width="347" height="15"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -9267,13 +9267,13 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="73m2 (bao gồm khôn viên Villa)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqh-h2-8eN">
-                                                            <rect key="frame" x="8" y="65" width="320" height="17"/>
+                                                            <rect key="frame" x="8" y="65" width="359" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e36-TH-GJW">
-                                                            <rect key="frame" x="8" y="112" width="320" height="50"/>
+                                                            <rect key="frame" x="8" y="112" width="359" height="50"/>
                                                             <color key="backgroundColor" red="0.94901960780000005" green="0.36862745099999999" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="Zoq-ef-n9p"/>
@@ -9288,50 +9288,50 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                             </userDefinedRuntimeAttributes>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CÁC TIỆN ÍCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dt-XD-V0H">
-                                                            <rect key="frame" x="8" y="178" width="320" height="17"/>
+                                                            <rect key="frame" x="8" y="178" width="359" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MÔ TẢ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N77-ef-qqC">
-                                                            <rect key="frame" x="8" y="347" width="320" height="17"/>
+                                                            <rect key="frame" x="8" y="347" width="359" height="20.333333333333314"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWV-h4-7bq">
+                                                            <rect key="frame" x="8" y="383.33333333333331" width="359" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWV-h4-7bq">
-                                                            <rect key="frame" x="8" y="380" width="320" height="0.0"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐIỀU KIỆN &amp; GHI CHÚ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9O-bp-AOh">
-                                                            <rect key="frame" x="8" y="410" width="320" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <rect key="frame" x="8" y="398.33333333333331" width="359" height="20.333333333333314"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYN-c2-pvU">
-                                                            <rect key="frame" x="8" y="457" width="320" height="0.0"/>
+                                                            <rect key="frame" x="8" y="433.66666666666669" width="359" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐÁNH GIÁ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB4-wZ-6hQ">
-                                                            <rect key="frame" x="8" y="477" width="320" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <rect key="frame" x="8" y="453.66666666666669" width="359" height="20.333333333333314"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUR-Wq-RHw">
-                                                            <rect key="frame" x="8" y="510" width="320" height="160"/>
+                                                            <rect key="frame" x="8" y="490" width="359" height="180"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0w6-lV-tAv">
                                                                     <rect key="frame" x="8" y="8" width="24" height="24"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwI-e5-gMh">
                                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <color key="textColor" red="0.94901960780000005" green="0.36862745099999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -9352,18 +9352,18 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWY-ca-fAm">
-                                                                    <rect key="frame" x="38" y="4" width="274" height="140"/>
+                                                                    <rect key="frame" x="38" y="4" width="313" height="80"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mf-Pi-PCw">
-                                                                            <rect key="frame" x="16" y="8" width="242" height="0.0"/>
+                                                                            <rect key="frame" x="16" y="8" width="281" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IV7-zP-wfI">
-                                                                            <rect key="frame" x="16" y="12" width="242" height="0.0"/>
+                                                                            <rect key="frame" x="16" y="12" width="281" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -9373,7 +9373,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                                         <constraint firstItem="8Mf-Pi-PCw" firstAttribute="leading" secondItem="JWY-ca-fAm" secondAttribute="leading" constant="16" id="FJE-CM-B5o"/>
                                                                         <constraint firstAttribute="trailing" secondItem="8Mf-Pi-PCw" secondAttribute="trailing" constant="16" id="LIR-cI-zXt"/>
                                                                         <constraint firstAttribute="trailing" secondItem="IV7-zP-wfI" secondAttribute="trailing" constant="16" id="PjR-Sb-ASq"/>
-                                                                        <constraint firstAttribute="height" constant="140" id="QNj-K7-Fo9"/>
+                                                                        <constraint firstAttribute="height" constant="80" id="QNj-K7-Fo9"/>
                                                                         <constraint firstItem="IV7-zP-wfI" firstAttribute="top" secondItem="8Mf-Pi-PCw" secondAttribute="bottom" constant="4" id="kdi-di-us6"/>
                                                                         <constraint firstItem="IV7-zP-wfI" firstAttribute="leading" secondItem="JWY-ca-fAm" secondAttribute="leading" constant="16" id="wmW-FV-4uA"/>
                                                                     </constraints>
@@ -9383,16 +9383,9 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saD-m6-Tn1">
-                                                                    <rect key="frame" x="58" y="148" width="0.0" height="12"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0R-Ma-6dw">
-                                                                    <rect key="frame" x="254" y="148" width="58" height="27"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <rect key="frame" x="285" y="88" width="66" height="29"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <state key="normal" title="Xem thêm">
                                                                         <color key="titleColor" red="0.94901960780000005" green="0.36862745099999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
@@ -9405,19 +9398,19 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                                 <constraint firstItem="JWY-ca-fAm" firstAttribute="top" secondItem="dUR-Wq-RHw" secondAttribute="top" constant="4" id="BKG-rd-PI6"/>
                                                                 <constraint firstItem="0w6-lV-tAv" firstAttribute="leading" secondItem="dUR-Wq-RHw" secondAttribute="leading" constant="8" id="W8z-aX-XMk"/>
                                                                 <constraint firstItem="0w6-lV-tAv" firstAttribute="top" secondItem="dUR-Wq-RHw" secondAttribute="top" constant="8" id="gT6-Wm-e4e"/>
-                                                                <constraint firstAttribute="height" constant="160" id="hQT-No-P0F"/>
+                                                                <constraint firstAttribute="height" constant="180" id="hQT-No-P0F"/>
                                                                 <constraint firstItem="r0R-Ma-6dw" firstAttribute="top" secondItem="JWY-ca-fAm" secondAttribute="bottom" constant="4" id="i5y-5c-lh7"/>
                                                                 <constraint firstAttribute="trailing" secondItem="JWY-ca-fAm" secondAttribute="trailing" constant="8" id="iXm-o6-aV5"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ẢNH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9n-9t-LFq">
-                                                            <rect key="frame" x="8" y="700" width="320" height="17"/>
+                                                            <rect key="frame" x="8" y="700" width="359" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tLR-hL-uFp">
-                                                            <rect key="frame" x="8" y="733" width="320" height="80"/>
+                                                            <rect key="frame" x="8" y="733" width="359" height="80"/>
                                                             <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="80" id="gF6-kr-3JS"/>
@@ -9477,7 +9470,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                             </cells>
                                                         </collectionView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/mỗi đêm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE7-ch-EVp">
-                                                            <rect key="frame" x="267" y="38" width="53" height="14"/>
+                                                            <rect key="frame" x="306" y="38" width="53" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -9499,7 +9492,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="auS-0K-dAU">
-                                                            <rect key="frame" x="8" y="211" width="320" height="120"/>
+                                                            <rect key="frame" x="8" y="211" width="359" height="120"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="120" id="xqo-Qz-N85"/>
@@ -9584,7 +9577,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                         <constraint firstItem="auS-0K-dAU" firstAttribute="leading" secondItem="KP9-uF-1zd" secondAttribute="leading" constant="8" id="9vr-uh-2Sm"/>
                                                         <constraint firstAttribute="trailing" secondItem="5Bt-Qp-azS" secondAttribute="trailing" constant="8" id="AT7-7a-3bG"/>
                                                         <constraint firstAttribute="trailing" secondItem="dB4-wZ-6hQ" secondAttribute="trailing" constant="8" id="B9e-F4-CrU"/>
-                                                        <constraint firstItem="kYN-c2-pvU" firstAttribute="top" secondItem="N9O-bp-AOh" secondAttribute="bottom" constant="30" id="D2b-CI-w9P"/>
+                                                        <constraint firstItem="kYN-c2-pvU" firstAttribute="top" secondItem="N9O-bp-AOh" secondAttribute="bottom" constant="15" id="D2b-CI-w9P"/>
                                                         <constraint firstItem="kTp-Ya-hKj" firstAttribute="top" secondItem="KP9-uF-1zd" secondAttribute="top" constant="8" id="DIl-pD-wAv"/>
                                                         <constraint firstAttribute="trailing" secondItem="f9n-9t-LFq" secondAttribute="trailing" constant="8" id="DU4-28-X1q"/>
                                                         <constraint firstAttribute="trailing" secondItem="xqh-h2-8eN" secondAttribute="trailing" constant="8" id="DuH-ab-2mP"/>
@@ -9617,7 +9610,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                         <constraint firstItem="4dt-XD-V0H" firstAttribute="leading" secondItem="KP9-uF-1zd" secondAttribute="leading" constant="8" id="oxd-Bz-dl9"/>
                                                         <constraint firstItem="e36-TH-GJW" firstAttribute="top" secondItem="xqh-h2-8eN" secondAttribute="bottom" constant="30" id="pkb-nO-lI0"/>
                                                         <constraint firstAttribute="trailing" secondItem="auS-0K-dAU" secondAttribute="trailing" constant="8" id="qfx-EI-ops"/>
-                                                        <constraint firstItem="N9O-bp-AOh" firstAttribute="top" secondItem="jWV-h4-7bq" secondAttribute="bottom" constant="30" id="qrb-qz-oHF"/>
+                                                        <constraint firstItem="N9O-bp-AOh" firstAttribute="top" secondItem="jWV-h4-7bq" secondAttribute="bottom" constant="15" id="qrb-qz-oHF"/>
                                                         <constraint firstAttribute="trailing" secondItem="4dt-XD-V0H" secondAttribute="trailing" constant="8" id="tce-52-MN5"/>
                                                         <constraint firstAttribute="trailing" secondItem="kYN-c2-pvU" secondAttribute="trailing" constant="8" id="u7T-kl-J5W"/>
                                                         <constraint firstItem="kYN-c2-pvU" firstAttribute="leading" secondItem="KP9-uF-1zd" secondAttribute="leading" constant="8" id="uBK-u3-5H9"/>
@@ -9663,9 +9656,13 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                         </subviews>
                         <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qcs-jJ-gC9" secondAttribute="bottom" id="9Hd-Me-Tjl"/>
                             <constraint firstItem="qcs-jJ-gC9" firstAttribute="leading" secondItem="GDW-m6-pE9" secondAttribute="leading" id="Fhi-4i-fEn"/>
                             <constraint firstAttribute="bottom" secondItem="qcs-jJ-gC9" secondAttribute="bottom" id="G3Y-hb-fGs"/>
                             <constraint firstItem="qcs-jJ-gC9" firstAttribute="top" secondItem="Da7-XP-g9f" secondAttribute="top" id="LTU-CL-hMy"/>
+                            <constraint firstItem="qcs-jJ-gC9" firstAttribute="leading" secondItem="GDW-m6-pE9" secondAttribute="leading" id="UCk-OC-0P0"/>
+                            <constraint firstItem="qcs-jJ-gC9" firstAttribute="top" secondItem="Da7-XP-g9f" secondAttribute="top" id="WbH-oV-IHe"/>
+                            <constraint firstItem="qcs-jJ-gC9" firstAttribute="trailing" secondItem="GDW-m6-pE9" secondAttribute="trailing" id="cUS-as-lO5"/>
                             <constraint firstItem="qcs-jJ-gC9" firstAttribute="trailing" secondItem="GDW-m6-pE9" secondAttribute="trailing" id="dd8-8K-hXN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GDW-m6-pE9"/>
@@ -13083,7 +13080,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa_succuss" translatesAutoresizingMaskIntoConstraints="NO" id="tn2-bq-t0T">
-                                        <rect key="frame" x="199" y="243" width="16" height="16"/>
+                                        <rect key="frame" x="170.66666666666666" y="236" width="73" height="23"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -13129,17 +13126,17 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
             <objects>
                 <viewController storyboardIdentifier="DetailTrackViewController" id="Us1-Qi-E3P" customClass="DetailTrackViewController" customModule="flamingo_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N5x-iH-cc3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqP-bI-tyk">
-                                <rect key="frame" x="0.0" y="88" width="375" height="1362"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="1512"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVA-H2-MW5">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="1290"/>
+                                        <rect key="frame" x="0.0" y="20" width="375" height="1440"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFn-5g-1pE">
-                                                <rect key="frame" x="20" y="30" width="335" height="1100"/>
+                                                <rect key="frame" x="20" y="30" width="335" height="1250"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_home" translatesAutoresizingMaskIntoConstraints="NO" id="MPJ-My-QaA">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="219"/>
@@ -13546,13 +13543,13 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐIỀU KIỆN &amp; GHI CHÚ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfP-Om-Cx1">
-                                                        <rect key="frame" x="15" y="945" width="305" height="20.333333333333371"/>
+                                                        <rect key="frame" x="15" y="930" width="305" height="20.333333333333371"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTr-px-sWi">
-                                                        <rect key="frame" x="15" y="985.33333333333326" width="305" height="0.0"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTr-px-sWi">
+                                                        <rect key="frame" x="15" y="970.33333333333326" width="305" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -13608,7 +13605,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                     <constraint firstItem="CX3-ub-3Ha" firstAttribute="top" secondItem="iIn-fp-I1k" secondAttribute="bottom" constant="20" id="NPG-vK-gi0"/>
                                                     <constraint firstItem="lYo-hu-MWh" firstAttribute="top" secondItem="A7S-mB-g5S" secondAttribute="bottom" constant="15" id="PMv-7D-HfS"/>
                                                     <constraint firstItem="iIn-fp-I1k" firstAttribute="leading" secondItem="aFn-5g-1pE" secondAttribute="leading" constant="15" id="Pi3-rJ-tu0"/>
-                                                    <constraint firstAttribute="height" constant="1100" id="Pv0-cf-o9x"/>
+                                                    <constraint firstAttribute="height" constant="1250" id="Pv0-cf-o9x"/>
                                                     <constraint firstAttribute="trailing" secondItem="KxB-Ef-OyR" secondAttribute="trailing" constant="16" id="QJf-5V-h6n"/>
                                                     <constraint firstItem="4EI-XL-vnL" firstAttribute="leading" secondItem="aFn-5g-1pE" secondAttribute="leading" constant="15" id="RjO-sh-zRW"/>
                                                     <constraint firstItem="Kl6-Re-5vD" firstAttribute="top" secondItem="GZK-xd-Mcj" secondAttribute="bottom" constant="15" id="Rkd-z1-Br2"/>
@@ -13631,7 +13628,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                     <constraint firstAttribute="trailing" secondItem="qCl-ac-YYM" secondAttribute="trailing" constant="15" id="qB4-Ts-qZC"/>
                                                     <constraint firstItem="t0l-tg-8mz" firstAttribute="leading" secondItem="aFn-5g-1pE" secondAttribute="leading" constant="15" id="qlh-xe-lLd"/>
                                                     <constraint firstItem="2fr-ES-1tD" firstAttribute="leading" secondItem="aFn-5g-1pE" secondAttribute="leading" constant="15" id="r8c-ky-YHn"/>
-                                                    <constraint firstItem="rfP-Om-Cx1" firstAttribute="top" secondItem="4EI-XL-vnL" secondAttribute="bottom" constant="30" id="s5g-BH-h3i"/>
+                                                    <constraint firstItem="rfP-Om-Cx1" firstAttribute="top" secondItem="4EI-XL-vnL" secondAttribute="bottom" constant="15" id="s5g-BH-h3i"/>
                                                     <constraint firstItem="MPJ-My-QaA" firstAttribute="top" secondItem="aFn-5g-1pE" secondAttribute="top" id="tj6-Gq-9rK"/>
                                                     <constraint firstAttribute="trailing" secondItem="t0l-tg-8mz" secondAttribute="trailing" constant="15" id="ugV-zJ-RzX"/>
                                                     <constraint firstItem="WEV-AQ-VgR" firstAttribute="leading" secondItem="aFn-5g-1pE" secondAttribute="leading" constant="15" id="vI5-2S-4oa"/>
@@ -13650,7 +13647,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM4-mK-wBO">
-                                                <rect key="frame" x="16" y="1220" width="343" height="50"/>
+                                                <rect key="frame" x="16" y="1370" width="343" height="50"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="ddB-VX-PUd"/>
@@ -13668,7 +13665,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOC-6n-5Pd">
-                                                <rect key="frame" x="16" y="1150" width="343" height="50"/>
+                                                <rect key="frame" x="16" y="1300" width="343" height="50"/>
                                                 <color key="backgroundColor" red="0.94901960780000005" green="0.36862745099999999" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="zeI-gg-YeQ"/>
@@ -13720,7 +13717,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Mr-2U-Els"/>
                     </view>
-                    <size key="freeformSize" width="375" height="1450"/>
+                    <size key="freeformSize" width="375" height="1600"/>
                     <connections>
                         <outlet property="Adult" destination="d0Z-R4-IAA" id="ktS-8M-87p"/>
                         <outlet property="CheckInDate" destination="gTM-Ds-VmT" id="wfi-SR-PFr"/>
@@ -13737,6 +13734,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                         <outlet property="collectionViewUtilities" destination="lYo-hu-MWh" id="7gY-5H-JAu"/>
                         <outlet property="commentRate" destination="ThC-9Z-el6" id="5ES-aa-0hR"/>
                         <outlet property="imageHeader" destination="MPJ-My-QaA" id="DYu-0a-GqU"/>
+                        <outlet property="note" destination="vTr-px-sWi" id="4bR-AI-qHi"/>
                         <outlet property="rating" destination="2fr-ES-1tD" id="eed-Dk-p7f"/>
                         <outlet property="starRate" destination="cnQ-5S-cbA" id="bGi-VL-8nS"/>
                         <outlet property="viewParent" destination="N5x-iH-cc3" id="qAs-M4-U71"/>
@@ -16226,13 +16224,13 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐIỀU KIỆN &amp; GHI CHÚ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNU-DG-wC6">
-                                                        <rect key="frame" x="15" y="945" width="305" height="20.333333333333371"/>
+                                                        <rect key="frame" x="15" y="930" width="305" height="20.333333333333371"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yP-pn-MGd">
-                                                        <rect key="frame" x="15" y="985.33333333333326" width="305" height="0.0"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yP-pn-MGd">
+                                                        <rect key="frame" x="15" y="970.33333333333326" width="305" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -16298,7 +16296,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                                                     <constraint firstItem="1yP-pn-MGd" firstAttribute="top" secondItem="MNU-DG-wC6" secondAttribute="bottom" constant="20" id="eJM-VJ-Hz0"/>
                                                     <constraint firstItem="Pw9-VO-YyM" firstAttribute="leading" secondItem="7iL-yX-BTb" secondAttribute="leading" constant="15" id="esw-lV-Hrh"/>
                                                     <constraint firstItem="GMH-9t-kOJ" firstAttribute="top" secondItem="Pw9-VO-YyM" secondAttribute="bottom" constant="15" id="fGj-LQ-22v"/>
-                                                    <constraint firstItem="MNU-DG-wC6" firstAttribute="top" secondItem="gO5-zV-204" secondAttribute="bottom" constant="30" id="gZJ-Ug-xMA"/>
+                                                    <constraint firstItem="MNU-DG-wC6" firstAttribute="top" secondItem="gO5-zV-204" secondAttribute="bottom" constant="15" id="gZJ-Ug-xMA"/>
                                                     <constraint firstItem="McX-dR-aMh" firstAttribute="leading" secondItem="7iL-yX-BTb" secondAttribute="leading" constant="20" id="ieN-qm-nq0"/>
                                                     <constraint firstAttribute="trailing" secondItem="8XA-v5-dwe" secondAttribute="trailing" constant="16" id="jSG-34-die"/>
                                                     <constraint firstAttribute="trailing" secondItem="7wl-Kn-KN6" secondAttribute="trailing" constant="15" id="kBR-t8-sZ7"/>
@@ -16424,6 +16422,7 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
                         <outlet property="collectionViewUtilities" destination="GMH-9t-kOJ" id="WX8-dy-us7"/>
                         <outlet property="commentRate" destination="Geq-qN-5zV" id="n1a-Z9-MJz"/>
                         <outlet property="imageHeader" destination="eDy-h1-j9b" id="Alt-Ug-qhM"/>
+                        <outlet property="note" destination="1yP-pn-MGd" id="GnK-f3-eJf"/>
                         <outlet property="rating" destination="rm4-7k-tUP" id="nZ6-kk-63h"/>
                         <outlet property="starRate" destination="Xwx-Nf-I0r" id="ZoQ-zj-A24"/>
                         <outlet property="viewParent" destination="dq1-xu-v1F" id="IJh-Uy-AOy"/>
@@ -16989,12 +16988,12 @@ Vị trí đắc địa, tài nguyên trù phú. Tựa sơn nghinh thủy.
     <inferredMetricsTieBreakers>
         <segue reference="NfN-t7-22b"/>
         <segue reference="6Vl-3w-ASD"/>
-        <segue reference="e3u-co-c4N"/>
+        <segue reference="xnr-SQ-mcN"/>
         <segue reference="jHK-oD-2Bf"/>
         <segue reference="NGb-Mx-Hwp"/>
         <segue reference="NB5-KZ-v2M"/>
         <segue reference="xee-tz-dt4"/>
-        <segue reference="A9V-Fm-BVw"/>
+        <segue reference="zAp-ff-Sed"/>
         <segue reference="r1R-Fb-2Zp"/>
         <segue reference="W0E-87-BqW"/>
         <segue reference="cJ0-c8-zlE"/>

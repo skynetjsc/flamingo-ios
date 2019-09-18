@@ -23,6 +23,7 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
     @IBOutlet weak var Adult: UILabel!
     @IBOutlet weak var Child: UILabel!
     @IBOutlet weak var Description: UILabel!
+    @IBOutlet weak var note: UILabel!
     
     @IBOutlet weak var GrandTotal: UILabel!
     @IBOutlet weak var CheckOutDate: UILabel!
@@ -300,7 +301,7 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
 //                            self.listPictures = listPicture
 //
 //                        }
-                        
+                        self.note.text = "\(String(describing: response["Data"]!["Condition"]!!))\n \(String(describing: response["Data"]!["Notes"]!!))"
                         if let listUtilities = response["Data"]!["ListUtilities"] as? [[String: Any]] {
                             self.ListUtilities = listUtilities
                         }
@@ -321,7 +322,6 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
 //                        self.imageHeader.downloaded(from: (self.listPictures[0]["Picture"] as? String)!)
 //                        self.imageHeader.contentMode = .scaleAspectFill
 //
-                        print(self.ListUtilities)
                         self.collectionViewUtilities.reloadData()
                     })
                     
@@ -422,13 +422,11 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
             self.showProgress()
             BaseService.shared.cancelRoom(params: params as [String : AnyObject]) { (status, response) in
                 self.hideProgress()
-                print(response)
                 if status {
                     if let _ = response["Data"] {
                         
                         DispatchQueue.main.async(execute: {
                             let result = response["Data"] as! [[String: Any]]
-                            print(result)
                             if (result[0]["BookingID"] != nil) {
                                 self.getUserInfo()
                                 self.btnCancel.isHidden = true
@@ -487,7 +485,6 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
         BaseService.shared.ratingRoom(params: params as [String : AnyObject]) { (status, response) in
             self.hideProgress()
             if status {
-                print(response)
                 if let _ = response["Data"]{
                     
 //                    DispatchQueue.main.async(execute: {
