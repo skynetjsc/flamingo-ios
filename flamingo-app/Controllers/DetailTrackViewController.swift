@@ -9,6 +9,7 @@
 import UIKit
 import Cosmos
 import VisualEffectView
+import SVPinView
 class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
 
@@ -38,10 +39,13 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
     var checkInDate: Date?
     var checkOutDate: Date?
     var PropertyRoomID: String?
+    var VerifyCode: String?
     @IBOutlet weak var btnRating: UIButton!
+    @IBOutlet var modalVerify: UIView!
     
     @IBOutlet weak var starRate: CosmosView!
     @IBOutlet weak var commentRate: UITextView!
+    @IBOutlet weak var code: SVPinView!
     
     var ListUtilities = [[String: Any]]()
     
@@ -159,6 +163,16 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
                 self.btnRating.isHidden = false
                 self.btnCancel.isHidden = false
             }
+        
+        
+        let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            print("123")
+        } else {
+            print("asdf")
+            self.btnCancel.isHidden = true
+        }
 //
 //        } else {
             self.getBook()
@@ -183,8 +197,8 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
             desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             desiredView.alpha = 1
         }, completion: { _ in
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = true
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
         })
         
         
@@ -196,16 +210,20 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
             desiredView.alpha = 0
         }) { _ in
             desiredView.removeFromSuperview()
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = false
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
     
     func getBook() {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
         let params = [
-            "Username": currentUser["LoginName"],
+            "Username": username,
             "BookingID": self.BookingID!
             ] as [String : Any]
         self.showProgress()
@@ -337,40 +355,52 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.getUserInfo()
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            self.getUserInfo()
+        }
+        
         self.getListReceipt()
     }
     
     func getUserInfo() {
+        
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-        let params = [
-            "ID": currentUser["ID"]
-            ] as [String : Any]
-        BaseService.shared.getUserInfo(params: params as [String : AnyObject]) { (status, response) in
-            
-            if status {
-                if let _ = response["Data"]{
-                    
-                    DispatchQueue.main.async(execute: {
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            let params = [
+                "ID": currentUser["ID"]
+                ] as [String : Any]
+            BaseService.shared.getUserInfo(params: params as [String : AnyObject]) { (status, response) in
+                
+                if status {
+                    if let _ = response["Data"]{
                         
-                        App.shared.save(value: response["Data"] as AnyObject, forKey: "USER_INFO")
-                        let userInfo = App.shared.getStringAnyObject(key: "USER_INFO")
+                        DispatchQueue.main.async(execute: {
+                            
+                            App.shared.save(value: response["Data"] as AnyObject, forKey: "USER_INFO")
+                            let userInfo = App.shared.getStringAnyObject(key: "USER_INFO")
+                            
+                            let point = userInfo["Point"]!
+                            
+                        })
                         
-                        let point = userInfo["Point"]!
                         
-                    })
-                    
-                    
+                    }
                 }
             }
         }
+        
     }
     
     func getListReceipt() {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-        
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
         let params = [
-            "Username": currentUser["LoginName"]!
+            "Username": username
             ] as [String : Any]
         BaseService.shared.vipCardInfo(params: params as [String : AnyObject]) { (status, response) in
             self.hideProgress()
@@ -407,15 +437,15 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
             }
         }
     }
+//    @IBAction func closeModal(_ sender: Any) {
+//        self.animateOut(modalVerify)
+//    }
     
-    @IBAction func cancelBooking(_ sender: Any) {
-        
-        
-        let refreshAlert = UIAlertController(title: "XÁC NHẬN HUỶ PHÒNG", message: "Bạn chắc chắn muốn huỷ phòng này", preferredStyle: UIAlertController.Style.alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
-            print("Handle Ok logic here")
-            
+    @IBAction func closeVerify(_ sender: Any) {
+        self.animateOut(modalVerify)
+    }
+    @IBAction func verify(_ sender: Any) {
+        if VerifyCode == code.getPin() {
             let params = [
                 "BookingID": self.listBook["BookingID"]!
                 ] as [String : Any]
@@ -450,6 +480,39 @@ class DetailTrackViewController: BaseViewController, UICollectionViewDelegate, U
                     self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                 }
             }
+        }
+    }
+    
+    
+    @IBAction func cancelBooking(_ sender: Any) {
+        
+        
+        let refreshAlert = UIAlertController(title: "XÁC NHẬN HUỶ PHÒNG", message: "Bạn chắc chắn muốn huỷ phòng này", preferredStyle: UIAlertController.Style.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
+            print("Handle Ok logic here")
+            self.animateIn(self.modalVerify)
+            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+            let paramVerify = [
+                "Telephone": currentUser["LoginName"],
+                "VerifyType": "1"
+                ] as [String : Any]
+            BaseService.shared.verifyCode(params: paramVerify as [String : AnyObject]) { (status, response) in
+                self.hideProgress()
+                if status {
+                    print(response)
+                    if let _ = response["Data"]!["ID"] {
+                        self.VerifyCode = "\(String(describing: response["Data"]!["VerifyCode"]!!))"
+
+                    } else {
+                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                    }
+
+                } else {
+                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                }
+            }
+            
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "Quay lại", style: .cancel, handler: { (action: UIAlertAction!) in

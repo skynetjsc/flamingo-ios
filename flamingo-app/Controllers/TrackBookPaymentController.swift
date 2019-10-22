@@ -151,8 +151,14 @@ class TrackBookPaymentController: BaseViewController, UICollectionViewDelegate, 
     
     func getListBook(_ status: String) {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
+        
         let params = [
-            "Username": currentUser["LoginName"],
+            "Username": username,
+            "DeviceID": UIDevice.current.identifierForVendor!.uuidString,
             "Status": status
             ] as [String : Any]
         self.showProgress()
@@ -209,6 +215,7 @@ class TrackBookPaymentController: BaseViewController, UICollectionViewDelegate, 
 //        dismiss(animated: true, completion: nil)
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+                newViewController.modalPresentationStyle = .fullScreen
                 self.present(newViewController, animated: true, completion: nil)
     }
     

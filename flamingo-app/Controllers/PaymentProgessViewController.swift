@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SVPinView
 class PaymentProgessViewController: BaseViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -32,6 +32,14 @@ class PaymentProgessViewController: BaseViewController {
     
     @IBOutlet weak var backgroundCard: UIView!
     @IBOutlet weak var cardName: TextField!
+    
+    @IBOutlet var viewParent: UIView!
+    @IBOutlet var modalVerify: UIView!
+    var VerifyCode: String?
+    
+    @IBOutlet weak var code: SVPinView!
+    
+    
     
     var visaStatus = false
     var masterCardStatus = false
@@ -126,6 +134,41 @@ class PaymentProgessViewController: BaseViewController {
         }
         textField.text = String(textField.text!.prefix(3))
         self.cvvNumber.text = String(text.prefix(3))
+    }
+    
+    func animateIn(_ desiredView: UIView) {
+        
+        let backgroundView = viewParent!
+        desiredView.frame = CGRect(x: 0, y: 0, width: viewParent.frame.width, height: viewParent.frame.height)
+        backgroundView.addSubview(desiredView)
+        
+        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        desiredView.alpha = 0
+        desiredView.center = backgroundView.center
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            desiredView.alpha = 1
+        }, completion: { _ in
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
+        })
+        
+        
+    }
+    
+    func animateOut(_ desiredView: UIView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.alpha = 0
+        }) { _ in
+            desiredView.removeFromSuperview()
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     
@@ -284,30 +327,22 @@ class PaymentProgessViewController: BaseViewController {
             self.masterCardView.layer.borderWidth = 0
         }
     }
+    @IBAction func closeModal(_ sender: Any) {
+        self.animateOut(modalVerify)
+    }
     
-    
-    
-    @IBAction func paymentBook(_ sender: Any) {
+    @IBAction func pay(_ sender: Any) {
         
-        // Updat Info Card
-        if (self.cardNo.text == nil || self.cardNo.text == "") {
-            self.showMessage(title: "Flamingo", message: "Vui lòng điền số thẻ")
-        } else if (self.cardName.text == nil || self.cardName.text == "") {
-            self.showMessage(title: "Flamingo", message: "Vui lòng điền tên chủ thẻ")
-        } else if (self.cardExprired.text == nil || self.cardExprired.text == "") {
-            self.showMessage(title: "Flamingo", message: "Vui lòng điền hạn của thẻ")
-        }  else if (self.cvv.text == nil || self.cvv.text == "") {
-            self.showMessage(title: "Flamingo", message: "Vui lòng điền cvv")
-        } else {
-            let refreshAlert = UIAlertController(title: "XÁC NHẬN ĐẶT PHÒNG", message: "Bạn chắc chắn đặt phòng này", preferredStyle: UIAlertController.Style.alert)
-            
-            refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
-                print("Handle Ok logic here")
-                
-                let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-                
+        if self.VerifyCode == self.code.getPin() {
+            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                var username = ""
+                if currentUser["LoginName"] != nil {
+                    username = currentUser["LoginName"] as! String
+                } else {
+                   username = UIDevice.current.identifierForVendor!.uuidString
+               }
                 let paramCard = [
-                    "UserName": currentUser["LoginName"],
+                    "UserName": username,
                     "UserCreditCardTypeID": "1",
                     "CardNo": self.cardNo.text!,
                     "CustName": self.cardName.text!,
@@ -339,8 +374,8 @@ class PaymentProgessViewController: BaseViewController {
                                     
                                     
                                     let params = [
-                                        "UserName" : currentUser["LoginName"]
-                                        ,"GuestName" : currentUser["LoginName"]
+                                        "UserName" : username
+                                        ,"GuestName" : username
                                         ,"Title" :""
                                         ,"Phone" : self.phone!
                                         ,"Email" : self.email!
@@ -407,6 +442,51 @@ class PaymentProgessViewController: BaseViewController {
                         self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                     }
                 }
+        }
+        
+    }
+    
+    
+    @IBAction func paymentBook(_ sender: Any) {
+        
+        // Updat Info Card
+        if (self.cardNo.text == nil || self.cardNo.text == "") {
+            self.showMessage(title: "Flamingo", message: "Vui lòng điền số thẻ")
+        } else if (self.cardName.text == nil || self.cardName.text == "") {
+            self.showMessage(title: "Flamingo", message: "Vui lòng điền tên chủ thẻ")
+        } else if (self.cardExprired.text == nil || self.cardExprired.text == "") {
+            self.showMessage(title: "Flamingo", message: "Vui lòng điền hạn của thẻ")
+        }  else if (self.cvv.text == nil || self.cvv.text == "") {
+            self.showMessage(title: "Flamingo", message: "Vui lòng điền cvv")
+        } else {
+            let refreshAlert = UIAlertController(title: "XÁC NHẬN ĐẶT PHÒNG", message: "Bạn chắc chắn đặt phòng này", preferredStyle: UIAlertController.Style.alert)
+            
+                            
+            refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
+                print("Handle Ok logic here")
+                self.animateIn(self.modalVerify)
+                let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                let paramVerify = [
+                    "Telephone": currentUser["LoginName"],
+                    "VerifyType": "1"
+                    ] as [String : Any]
+                BaseService.shared.verifyCode(params: paramVerify as [String : AnyObject]) { (status, response) in
+                    self.hideProgress()
+                    if status {
+                        print(response)
+                        if let _ = response["Data"]!["ID"] {
+                            self.VerifyCode = "\(String(describing: response["Data"]!["VerifyCode"]!!))"
+
+                        } else {
+                            self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        }
+
+                    } else {
+                        self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                    }
+                }
+
+                
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Quay lại", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -414,13 +494,6 @@ class PaymentProgessViewController: BaseViewController {
             }))
             
             present(refreshAlert, animated: true, completion: nil)
-            
-            
-            
-            
-            
-            
-            
         }
         
     }

@@ -15,6 +15,7 @@ class CustomerNavigationController: UINavigationController, UITabBarControllerDe
     @objc func backNav(_ sender: UIBarButtonItem) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+        newViewController.modalPresentationStyle = .fullScreen
         //            self.present(newViewController, animated: true, completion: nil)
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.window?.rootViewController = newViewController

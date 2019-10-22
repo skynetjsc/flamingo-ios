@@ -165,7 +165,7 @@ class UserDetailMenu: BaseViewController, UITableViewDelegate, UITableViewDataSo
         self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: CGFloat(offset))
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
@@ -179,7 +179,7 @@ class UserDetailMenu: BaseViewController, UITableViewDelegate, UITableViewDataSo
         
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
@@ -211,28 +211,29 @@ class UserDetailMenu: BaseViewController, UITableViewDelegate, UITableViewDataSo
                         }
                         if let vipCard = response["Data"]!["VipCardInfo"] as? [String: Any] {
                             self.listVipCartInfo = vipCard
+
+                            let dateFormatterGet = DateFormatter()
+                            dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                            
+                            let dateFormatterPrint = DateFormatter()
+                            dateFormatterPrint.dateFormat = "dd/MM/yyyy"
+                            
+                            
+                            if let datActive = dateFormatterGet.date(from: (self.listVipCartInfo["CreatedDate"]  as? String)!) {
+                                self.name.text = dateFormatterPrint.string(from: datActive)
+                            } else {
+                                self.name.text = "   "
+                            }
+                            var card = self.listVipCartInfo["CardCode"]!
+                            var CardCode = String(describing: card)
+                            if CardCode.elementsEqual("<null>") || CardCode.elementsEqual("") {
+                                CardCode = "   "
+                            }
+                            self.cardNumber.text = CardCode
+                            self.vip.text = "Hạn thẻ VIP 2"
                         }
                         
                         
-                        let dateFormatterGet = DateFormatter()
-                        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                        
-                        let dateFormatterPrint = DateFormatter()
-                        dateFormatterPrint.dateFormat = "dd/MM/yyyy"
-                        
-                        
-                        if let datActive = dateFormatterGet.date(from: (self.listVipCartInfo["CreatedDate"]  as? String)!) {
-                            self.name.text = dateFormatterPrint.string(from: datActive)
-                        } else {
-                            self.name.text = "   "
-                        }
-                        var card = self.listVipCartInfo["CardCode"]!
-                        var CardCode = String(describing: card)
-                        if CardCode.elementsEqual("<null>") || CardCode.elementsEqual("") {
-                            CardCode = "   "
-                        }
-                        self.cardNumber.text = CardCode
-                        self.vip.text = "Hạn thẻ VIP 2"
                         
                         self.tableView.reloadData()
                     })

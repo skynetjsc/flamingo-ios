@@ -35,20 +35,71 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func home(_ sender: Any) {
-        let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContentNavigation")
-        let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
-        let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-        UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContentNavigation")
+            let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+            let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+            UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func setting(_ sender: Any) {
-        let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SetupContentNavigation")
-        let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
-        let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-        UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SetupContentNavigation")
+            let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+            let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+            UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     @IBAction func card(_ sender: Any) {
-        self.performSegue(withIdentifier: "showCard", sender: nil)
+        
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+           self.performSegue(withIdentifier: "showCard", sender: nil)
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     func setupMenu(_ menuView: UIView) {

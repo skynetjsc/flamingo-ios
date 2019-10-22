@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenuSwift
 
 class UserViewController: UIViewController {
 
@@ -66,13 +67,18 @@ class UserViewController: UIViewController {
 //        UserDefaults.standard.synchronize()
         
         App.shared.remove(key: K_CURRENT_USER)
+        App.shared.remove(key: K_CURRENT_USER_INFO)
         App.shared.remove(key: "USER_INFO")
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        // instantiate your desired ViewController
-        let rootController = storyboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
-        
-        UIApplication.shared.keyWindow?.rootViewController = rootController
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        // instantiate your desired ViewController
+//        let rootController = storyboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
+//
+//        UIApplication.shared.keyWindow?.rootViewController = rootController
+        let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContentNavigation")
+        let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+        let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+        UIApplication.shared.keyWindow?.rootViewController = sideMenuController
     }
     
 }

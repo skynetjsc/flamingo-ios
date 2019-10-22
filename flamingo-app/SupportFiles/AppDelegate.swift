@@ -12,15 +12,47 @@ import SideMenuSwift
 import FBSDKLoginKit
 //import FBSDKCoreKit
 import GoogleSignIn
+import Firebase
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var didBecomeActive: (() -> (Void))?
+    let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+            }
+        }
+//        application.registerForRemoteNotifications()
+        if #available(iOS 13.0, *) {
+            window!.overrideUserInterfaceStyle = .light
+        } else {
+            // Fallback on earlier versions
+        }
         
         #if DEBUG
         var arguments = ProcessInfo.processInfo.arguments
@@ -31,35 +63,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureSideMenu()
 
         GIDSignIn.sharedInstance().clientID = "474747087001-bp597lmputsspte60uo6m1o1mksts2ts.apps.googleusercontent.com"
-        print(App.shared.getStringAnyObject(key: K_CURRENT_USER))
-        let token = App.shared.getStringAnyObject(key: K_CURRENT_USER)
-        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-        if token["access_token"] != nil{
+//        print(App.shared.getStringAnyObject(key: K_CURRENT_USER))
+//        let token = App.shared.getStringAnyObject(key: K_CURRENT_USER)
+//        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+//        if token["access_token"] != nil {
 
-//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
-////            self.present(newViewController, animated: true, completion: nil)
-//            self.window?.rootViewController = newViewController
-            if userInfo["ID"] != nil {
-                let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContentNavigation")
-                let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
-                let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-                self.window?.rootViewController = sideMenuController
-            } else {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                // instantiate your desired ViewController
-                let rootController = storyboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
-                
-                self.window?.rootViewController = rootController
-            }
+//            if userInfo["ID"] != nil {
+//                let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContentNavigation")
+//                let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+//                let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+//                self.window?.rootViewController = sideMenuController
+//            } else {
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                // instantiate your desired ViewController
+//                let rootController = storyboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
+//                
+//                self.window?.rootViewController = rootController
+//            }
             
-        } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            // instantiate your desired ViewController
-            let rootController = storyboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
-            
-            self.window?.rootViewController = rootController
-        }
+//        } else {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            // instantiate your desired ViewController
+//            let rootController = storyboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
+//
+//            self.window?.rootViewController = rootController
+//        }
         return true
     }
 
@@ -90,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SideMenuController.preferences.basic.defaultCacheKey = "0"
     }
     
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 //        return GIDSignIn.sharedInstance().handle(url as URL?,
 //                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
 //                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
@@ -118,6 +146,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         annotation: options[UIApplication.OpenURLOptionsKey.annotation])
 
     }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.hexString
+        Messaging.messaging().apnsToken = deviceToken
+        App.shared.deviceToken = deviceTokenString
+//        print(deviceTokenString)
+    }
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error)
+    }
 
 
 }
@@ -136,5 +182,106 @@ extension AppDelegate {
 extension UIApplication {
     var statusBarView : UIView? {
         return value(forKey: "statusBar") as? UIView
+    }
+}
+
+@available(iOS 10, *)
+extension AppDelegate : UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        if let messageID = userInfo[gcmMessageIDKey] {
+//            App.shared.save(value: (App.shared.getInt(key: K_NOTIFICATION) + 1 as AnyObject), forKey: K_NOTIFICATION)
+//            print("Message ID: \(messageID)")
+        }
+        completionHandler([.alert, .badge, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let messageID = userInfo[gcmMessageIDKey] {
+////            App.shared.save(value: (App.shared.getInt(key: K_NOTIFICATION) + 1 as AnyObject), forKey: K_NOTIFICATION)
+            print("Message ID: \(messageID)")
+            print("hihihi \(userInfo)")
+            
+            if userInfo["NotificationType"] as! String  == "0" {
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+                if  let conversationVC = storyboard.instantiateViewController(withIdentifier: "DetailNewsController") as? DetailNewsViewController,
+                    let tabBarController = self.window?.rootViewController as? SideMenuController,
+                    let navController = tabBarController.contentViewController as? UINavigationController {
+
+                    conversationVC.id = userInfo["ID"] as! String
+                        navController.pushViewController(conversationVC, animated: true)
+                }
+            } else if userInfo["NotificationType"] as! String  == "1"{
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+                if  let conversationVC = storyboard.instantiateViewController(withIdentifier: "DetailPromotionController") as? DetailPromotionViewController,
+                    let tabBarController = self.window?.rootViewController as? SideMenuController,
+                    let navController = tabBarController.contentViewController as? UINavigationController {
+
+                    conversationVC.id = userInfo["ID"] as! String
+                        navController.pushViewController(conversationVC, animated: true)
+                }
+            } else if userInfo["NotificationType"] as! String  == "2"{
+                print("haha")
+            }
+            
+            
+            
+        }
+        completionHandler()
+    }
+}
+extension AppDelegate : MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
+        let params = [
+            "Token": fcmToken,
+            "UserName": username,
+            "SystemType": "0",
+            "Version": "1.0.0",
+            "DeviceID": UIDevice.current.identifierForVendor!.uuidString
+        ]
+        BaseService.shared.updateToken(params: params as [String : AnyObject]) { (status, response) in
+            
+            print(response)
+            if status {
+//                if let _ = response["Data"]{
+//
+//                    DispatchQueue.main.async(execute: {
+//                        if let listNews = response["Data"]! as? [[String: Any]] {
+//                            self.listNews = listNews
+//                        }
+//
+//                        self.tableView.reloadData()
+//                    })
+//
+//
+//
+//
+//                } else {
+//                    print("err")
+//                }
+            } else {
+                print("err")
+            }
+        }
+    }
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
     }
 }

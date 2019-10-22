@@ -19,8 +19,8 @@ class PaymentSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
-        navigationItem.leftBarButtonItem = backButton
+//        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
+//        navigationItem.leftBarButtonItem = backButton
         // Do any additional setup after loading the view.
     }
     
@@ -44,36 +44,58 @@ class PaymentSuccessViewController: UIViewController {
     }
     
     func getUserInfo() {
-        let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-        let params = [
-            "ID": currentUser["ID"]
-            ] as [String : Any]
-        BaseService.shared.getUserInfo(params: params as [String : AnyObject]) { (status, response) in
-            
-            if status {
-                print(response)
-                if let _ = response["Data"]{
-                    
-                    DispatchQueue.main.async(execute: {
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+            let params = [
+                "ID": currentUser["ID"]
+                ] as [String : Any]
+            BaseService.shared.getUserInfo(params: params as [String : AnyObject]) { (status, response) in
+                
+                if status {
+                    print(response)
+                    if let _ = response["Data"]{
                         
-                        App.shared.save(value: response["Data"] as AnyObject, forKey: "USER_INFO")
+                        DispatchQueue.main.async(execute: {
+                            
+                            App.shared.save(value: response["Data"] as AnyObject, forKey: "USER_INFO")
+                            
+                            
+                        })
                         
                         
-                    })
-                    
-                    
+                    }
                 }
             }
         }
+        
     }
     
 
 
     @IBAction func goToTrackBook(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "DetailTrackPaymentViewController") as! DetailTrackPaymentViewController
-        controller.BookingID = self.BookingID!
-        print(self.BookingID!)
-        self.navigationController?.pushViewController(controller, animated: true)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "DetailTrackPaymentViewController") as! DetailTrackPaymentViewController
+//        controller.BookingID = self.BookingID!
+//        controller.modalPresentationStyle = .fullScreen
+//        if #available(iOS 13.0, *) {
+//            controller.isModalInPresentation = true
+//        } else {
+//            // Fallback on earlier versions
+//        }
+////        controller.present(controller, animated: true, completion: nil)
+////        let aObjNavi = UINavigationController(rootViewController: controller)
+//        self.navigationController?.pushViewController(controller, animated: true)
+        
+        performSegue(withIdentifier: "DetailTrackPaymentViewController", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailTrackPaymentViewController" {
+            if let viewController: DetailTrackPaymentViewController = segue.destination as? DetailTrackPaymentViewController {
+                viewController.modalPresentationStyle = .fullScreen
+                viewController.BookingID = self.BookingID!
+            }
+        }
     }
 }

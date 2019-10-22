@@ -65,44 +65,47 @@ class PaymentInfoViewController: BaseViewController, UIPickerViewDelegate, UIPic
     func setInput() {
         let userInfo = App.shared.getStringAnyObject(key: "USER_INFO")
 //        print(userInfo)
-        var fName = userInfo["FirstName"]!
-        var firstName = String(describing: fName)
-        if firstName.elementsEqual("<null>") || firstName.elementsEqual("") {
-            firstName = ""
+        if userInfo["FirstName"] != nil {
+            var fName = userInfo["FirstName"]!
+            var firstName = String(describing: fName)
+            if firstName.elementsEqual("<null>") || firstName.elementsEqual("") {
+                firstName = ""
+            }
+            
+            var lName = userInfo["LastName"]!
+            var lastName = String(describing: lName)
+            if lastName.elementsEqual("<null>") || lastName.elementsEqual("") {
+                lastName = ""
+            }
+            
+            var mName = userInfo["MiddleName"]!
+            var middleName = String(describing: mName)
+            if middleName.elementsEqual("<null>") || middleName.elementsEqual("") {
+                middleName = ""
+            }
+            
+            var email = userInfo["Email"]!
+            var Email = String(describing: email)
+            if Email.elementsEqual("<null>") || Email.elementsEqual("") {
+                Email = ""
+            }
+            
+            var tphone = userInfo["Telephone"]!
+            var Telephone = String(describing: tphone)
+            if Telephone.elementsEqual("<null>") || Telephone.elementsEqual("") {
+                Telephone = ""
+            }
+            
+            if !firstName.elementsEqual("") {
+                    self.name.text = "\(firstName) \(middleName) \(lastName)"
+            } else {
+                self.name.text = ""
+            }
+            
+            self.phone.text = Telephone
+            self.email.text = Email
         }
         
-        var lName = userInfo["LastName"]!
-        var lastName = String(describing: lName)
-        if lastName.elementsEqual("<null>") || lastName.elementsEqual("") {
-            lastName = ""
-        }
-        
-        var mName = userInfo["MiddleName"]!
-        var middleName = String(describing: mName)
-        if middleName.elementsEqual("<null>") || middleName.elementsEqual("") {
-            middleName = ""
-        }
-        
-        var email = userInfo["Email"]!
-        var Email = String(describing: email)
-        if Email.elementsEqual("<null>") || Email.elementsEqual("") {
-            Email = ""
-        }
-        
-        var tphone = userInfo["Telephone"]!
-        var Telephone = String(describing: tphone)
-        if Telephone.elementsEqual("<null>") || Telephone.elementsEqual("") {
-            Telephone = ""
-        }
-        
-        if !firstName.elementsEqual("") {
-                self.name.text = "\(firstName) \(middleName) \(lastName)"
-        } else {
-            self.name.text = ""
-        }
-        
-        self.phone.text = Telephone
-        self.email.text = Email
     }
     
     

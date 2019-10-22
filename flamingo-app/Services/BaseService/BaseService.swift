@@ -53,7 +53,7 @@ class BaseService: NSObject {
     }
     
     func forgotPassword(params: [String : AnyObject], callback: @escaping (_ status: Bool, _ response: [String: AnyObject])->()){
-        Service.shared().post(params, withURL: BASE_URL + "/api/UserLogin/ChangePassword", success: { (data, response) in
+        Service.shared().post(params, withURL: BASE_URL + "/api/UserLogin/ForgetPassword", success: { (data, response) in
             callback(true, response as? [String : AnyObject] ?? [:])
         }, failure: { (task, error) in
             callback(false, [:])
@@ -273,7 +273,42 @@ class BaseService: NSObject {
             callback(false, [:])
         })
     }
+    
+    func updateToken(params: [String : AnyObject], callback: @escaping (_ status: Bool, _ response: [String: AnyObject])->()){
+        Service.shared().post(params, withURL: BASE_URL + "/api/Notification/UpdateToken", success: { (data, response) in
+            callback(true, response as? [String : AnyObject] ?? [:])
+        }, failure: { (task, error) in
+            callback(false, [:])
+        })
+    }
+    
+    func ruleConfigByKey(params: [String : AnyObject], callback: @escaping (_ status: Bool, _ response: [String: AnyObject])->()){
+        Service.shared().post(params, withURL: BASE_URL + "/api/Property/RuleConfigByKey", success: { (data, response) in
+            callback(true, response as? [String : AnyObject] ?? [:])
+        }, failure: { (task, error) in
+            callback(false, [:])
+        })
+    }
+    
+    
+    func detailNews(params: [String : AnyObject], callback: @escaping (_ status: Bool, _ response: [String: AnyObject])->()){
+        Service.shared().post(params, withURL: BASE_URL + "/api/New/Detail", success: { (data, response) in
+            callback(true, response as? [String : AnyObject] ?? [:])
+        }, failure: { (task, error) in
+            callback(false, [:])
+        })
+    }
+    
+    func detailPromotion(params: [String : AnyObject], callback: @escaping (_ status: Bool, _ response: [String: AnyObject])->()){
+        Service.shared().post(params, withURL: BASE_URL + "/api/Promotion/Detail", success: { (data, response) in
+            callback(true, response as? [String : AnyObject] ?? [:])
+        }, failure: { (task, error) in
+            callback(false, [:])
+        })
+    }
 
+    
+    
     
 }
 

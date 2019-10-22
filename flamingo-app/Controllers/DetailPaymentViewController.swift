@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Koyomi
 import VisualEffectView
 import Cosmos
 
@@ -25,7 +24,6 @@ class DetailPaymentViewController: BaseViewController, UICollectionViewDelegate,
     var valEndDate: String?
     
     @IBOutlet weak var calendarView: CalendarView!
-    @IBOutlet weak var koyomi: Koyomi!
     @IBOutlet weak var bgPopupChosseDate: VisualEffectView!
     @IBOutlet weak var segementedMonth: UISegmentedControl!
     @IBOutlet weak var imageHeader: UIImageView!
@@ -265,9 +263,12 @@ class DetailPaymentViewController: BaseViewController, UICollectionViewDelegate,
     
     func getDetailRoom() {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-        
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
         let params = [
-            "Username": currentUser["LoginName"],
+            "Username": username,
             "PropertyRoomID": self.PropertyRoomID!,
             "CheckInDate": self.valStartDate!,
             "CheckOutDate": self.valEndDate!
@@ -686,8 +687,8 @@ class DetailPaymentViewController: BaseViewController, UICollectionViewDelegate,
             desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             desiredView.alpha = 1
         }, completion: { _ in
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = true
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
         })
         
         
@@ -699,8 +700,8 @@ class DetailPaymentViewController: BaseViewController, UICollectionViewDelegate,
             desiredView.alpha = 0
         }) { _ in
             desiredView.removeFromSuperview()
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = false
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }

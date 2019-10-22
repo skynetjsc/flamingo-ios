@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>CLIENT_ID</key>
-      <string>474747087001-bp597lmputsspte60uo6m1o1mksts2ts.apps.googleusercontent.com</string>
-      <key>REVERSED_CLIENT_ID</key>
-      <string>com.googleusercontent.apps.474747087001-bp597lmputsspte60uo6m1o1mksts2ts</string>
-      <key>PLIST_VERSION</key>
-      <string>1</string>
-      <key>BUNDLE_ID</key>
-      <string>com.flamingo</string>
-    </dict>
-    </plist>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>191858037345-54qcktl08gqf097dpi2leopknl66043k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.191858037345-54qcktl08gqf097dpi2leopknl66043k</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>191858037345-93824t23tmfbksjo01piko3ffq42d8qa.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDqkmvv2EtuvtgnS4OnQuoXPhuAKKhiqBc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>191858037345</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.flamingogroup.mobileapp</string>
+	<key>PROJECT_ID</key>
+	<string>cms-fdlr-250704</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cms-fdlr-250704.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:191858037345:ios:e04093e9165f53cbc05020</string>
+	<key>DATABASE_URL</key>
+	<string>https://cms-fdlr-250704.firebaseio.com</string>
+</dict>
+</plist>

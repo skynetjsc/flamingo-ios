@@ -13,14 +13,14 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import GoogleSignIn
 import BiometricAuthentication
-class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+class LoginController: BaseViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     
     
     
     @IBOutlet weak var userName: TextField!
     @IBOutlet weak var password: TextField!
-    
+    var UserInfoID: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
@@ -44,7 +44,7 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
         BaseService.shared.login(params: params as [String : AnyObject]) { (status, response) in
             self.hideProgress()
             if status {
-                
+                print(response)
                 if let _ = response["Data"]?["ID"] as? Int {
 //                    let userLoginStore = App.shared.getStringAnyObject(key: "USER_LOGIN")
 //                    var statusTouchID = false
@@ -63,6 +63,7 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
 //                    self.getUserInfo((response["Data"]!["ID"] as? String)!)
                                         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                                         let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+                                        newViewController.modalPresentationStyle = .fullScreen
                                         self.present(newViewController, animated: true, completion: nil)
                 } else {
                     self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
@@ -126,6 +127,7 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
                                     App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
                                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                                     let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+                                    newViewController.modalPresentationStyle = .fullScreen
                                     self!.present(newViewController, animated: true, completion: nil)
                                 } else {
                                     self!.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
@@ -197,12 +199,25 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
         BaseService.shared.getUserInfo(params: params as [String : AnyObject]) { (status, response) in
             self.hideProgress()
             if status {
+
+                print(response)
                 if let _ = response["Data"]{
                     
                     DispatchQueue.main.async(execute: {
-                        
                         App.shared.save(value: response["Data"] as AnyObject, forKey: "USER_INFO")
-                        
+                        var mName = response["Data"]!["Email"]!!
+                        var email = String(describing: mName)
+                        App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
+                        if email.elementsEqual("<null>") || email.elementsEqual("") {
+                            self.UserInfoID = "\(String(describing: response["Data"]!["ID"]!!))"
+                            self.performSegue(withIdentifier: "loginSocial", sender: nil)
+                        } else {
+                            App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
+                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+                            newViewController.modalPresentationStyle = .fullScreen
+                            self.present(newViewController, animated: true, completion: nil)
+                        }
                     })
                     
                     
@@ -222,6 +237,8 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
     
     func facebooklogin() {
         let fbLoginManager : LoginManager = LoginManager()
+        
+
         fbLoginManager.logIn(permissions: ["email"], from: self, handler: { (result, error) -> Void in
 
             print("\n\n result: \(result)")
@@ -263,11 +280,14 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
                         self.hideProgress()
                         if status {
                             if let _ = response["Data"]?["ID"] as? Int {
+                                DispatchQueue.main.async(execute: {
+                                    self.getUserInfo(String(describing: response["Data"]!["ID"]!!))
+                                })
                                 
-                                App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
-                                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
-                                self.present(newViewController, animated: true, completion: nil)
+                                
+                                
+                                
+                                
                             } else {
                                 self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
                             }
@@ -302,11 +322,22 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
                     self.hideProgress()
                     if status {
                         if let _ = response["Data"]?["ID"] as? Int {
-                            
-                            App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
-                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
-                            self.present(newViewController, animated: true, completion: nil)
+                            self.getUserInfo(String(describing: response["Data"]!["ID"]!!))
+//                            App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
+//                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                            let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+//                            self.present(newViewController, animated: true, completion: nil)
+//                            let userInfo = App.shared.getStringAnyObject(key: "USER_INFO")
+//                            var mName = userInfo["Email"]!
+//                            var middleName = String(describing: mName)
+//                            if middleName.elementsEqual("<null>") || middleName.elementsEqual("") {
+//                                self.performSegue(withIdentifier: "loginSocial", sender: nil)
+//                            } else {
+//                                App.shared.save(value: response["Data"] as AnyObject, forKey: K_CURRENT_USER_INFO)
+//                                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                                let newViewController = storyBoard.instantiateViewController(withIdentifier: "SideMenu") as! SideMenuController
+//                                self.present(newViewController, animated: true, completion: nil)
+//                            }
                         } else {
                             self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
                         }
@@ -314,6 +345,17 @@ class LoginController: BaseViewController, GIDSignInUIDelegate, GIDSignInDelegat
                         self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                     }
                 }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loginSocial" {
+            if let viewController: UpdateFullNameViewController = segue.destination as? UpdateFullNameViewController {
+                viewController.LoginSocail = true
+                viewController.Password = ""
+                viewController.Telephone = ""
+                viewController.UserInfoID = self.UserInfoID!
             }
         }
     }

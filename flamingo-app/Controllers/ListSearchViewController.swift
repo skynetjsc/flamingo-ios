@@ -8,7 +8,6 @@
 
 import UIKit
 import VisualEffectView
-import Koyomi
 //import KDCalendar
 
 
@@ -323,8 +322,8 @@ class ListSearchViewController: BaseViewController {
             desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             desiredView.alpha = 1
         }, completion: { _ in
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = true
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
         })
         
         
@@ -336,8 +335,8 @@ class ListSearchViewController: BaseViewController {
             desiredView.alpha = 0
         }) { _ in
             desiredView.removeFromSuperview()
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = false
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
@@ -349,9 +348,12 @@ class ListSearchViewController: BaseViewController {
     
     func getListSearch(_ refresh: Bool) {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-        
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
         let params = [
-            "Username": currentUser["LoginName"]!,
+            "Username": username,
             "PropertyID": "\(self.PropertyID!)",
             "Content" : self.Content,
             "CheckInDate": self.valStartDate!,
@@ -399,7 +401,7 @@ class ListSearchViewController: BaseViewController {
         let color =   UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: 0)
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .black
         
@@ -493,81 +495,106 @@ extension ListSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func addFavorite(_ sender: UITapGestureRecognizer) {
         
-        let tapView = sender.view
-        let tag = tapView?.tag
-        
-        let indexPath = IndexPath(row: tag! + 2, section: 0)
-        let cell = self.tableView.cellForRow(at: indexPath) as! ListRoomTableViewCell
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            let tapView = sender.view
+            let tag = tapView?.tag
+            
+            let indexPath = IndexPath(row: tag! + 2, section: 0)
+            let cell = self.tableView.cellForRow(at: indexPath) as! ListRoomTableViewCell
 
-        let data = self.listSearch[tag!]
-//        addFavorite
-        if data["IsFavourite"] as! Int == 0 {
-            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-            
-            let params = [
-                "UserName": currentUser["LoginName"],
-                "PropertyRoomID": data["ProperRoomID"],
-                "IsAdd": "True"
-                ] as [String : Any]
-            self.showProgress()
-            BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
-                self.hideProgress()
-                if status {
-//                    print(response)
-                    if let _ = response["Data"] {
-                        
-                        DispatchQueue.main.async(execute: {
-                            if (response["Data"]!["Result"] as! Int == 1) {
-                                cell.icon_like.image = UIImage(named: "heart_like")
-                                self.getListSearch(false)
-                            }
-                        })
-                        
-                        
-                    } else {
-                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
-                    }
-                } else {
-                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+            let data = self.listSearch[tag!]
+    //        addFavorite
+            if data["IsFavourite"] as! Int == 0 {
+                let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                var username = ""
+                if currentUser["LoginName"] != nil {
+                    username = currentUser["LoginName"] as! String
                 }
-            }
-            
-        } else {
-            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-            
-            let params = [
-                "UserName": currentUser["LoginName"],
-                "PropertyRoomID": data["ProperRoomID"],
-                "IsAdd": "False"
-                ] as [String : Any]
-            self.showProgress()
-            BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
-                self.hideProgress()
-                if status {
-//                    print(response)
-                    if let _ = response["Data"] {
-                        
-                        DispatchQueue.main.async(execute: {
-                            if (response["Data"]!["Result"] as! Int == 1) {
-                                cell.icon_like.image = UIImage(named: "heart_white")
-                                self.getListSearch(false)
-                            }
-                            //                            if (response["Data"]!["BookingID"] != nil) {
-                            //                                self.BookingID = "\(String(describing: response["Data"]!["BookingID"]))"
-                            //                                self.performSegue(withIdentifier: "paymentViewSuccess", sender: nil)
-                            //
+                let params = [
+                    "UserName": username,
+                    "PropertyRoomID": data["ProperRoomID"],
+                    "IsAdd": "True"
+                    ] as [String : Any]
+                self.showProgress()
+                BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
+                    self.hideProgress()
+                    if status {
+    //                    print(response)
+                        if let _ = response["Data"] {
                             
-                        })
-                        
-                        
+                            DispatchQueue.main.async(execute: {
+                                if (response["Data"]!["Result"] as! Int == 1) {
+                                    cell.icon_like.image = UIImage(named: "heart_like")
+                                    self.getListSearch(false)
+                                }
+                            })
+                            
+                            
+                        } else {
+                            self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        }
                     } else {
-                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                     }
-                } else {
-                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                }
+                
+            } else {
+                let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                var username = ""
+                if currentUser["LoginName"] != nil {
+                    username = currentUser["LoginName"] as! String
+                }
+                let params = [
+                    "UserName": username,
+                    "PropertyRoomID": data["ProperRoomID"],
+                    "IsAdd": "False"
+                    ] as [String : Any]
+                self.showProgress()
+                BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
+                    self.hideProgress()
+                    if status {
+    //                    print(response)
+                        if let _ = response["Data"] {
+                            
+                            DispatchQueue.main.async(execute: {
+                                if (response["Data"]!["Result"] as! Int == 1) {
+                                    cell.icon_like.image = UIImage(named: "heart_white")
+                                    self.getListSearch(false)
+                                }
+                                //                            if (response["Data"]!["BookingID"] != nil) {
+                                //                                self.BookingID = "\(String(describing: response["Data"]!["BookingID"]))"
+                                //                                self.performSegue(withIdentifier: "paymentViewSuccess", sender: nil)
+                                //
+                                
+                            })
+                            
+                            
+                        } else {
+                            self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        }
+                    } else {
+                        self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                    }
                 }
             }
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
         }
+        
+        
     }
     
     

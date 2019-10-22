@@ -156,8 +156,14 @@ class TrackBookController: BaseViewController, UICollectionViewDelegate, UIColle
     
     func getListBook(_ status: String) {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
+        
         let params = [
             "Username": currentUser["LoginName"],
+            "DeviceID": UIDevice.current.identifierForVendor!.uuidString,
             "Status": status
             ] as [String : Any]
         self.showProgress()

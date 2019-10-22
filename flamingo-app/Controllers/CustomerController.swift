@@ -102,7 +102,7 @@ class CustomerController: BaseViewController, UIScrollViewDelegate {
         //                self.backgroundView.backgroundColor = color
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         self.backgroundView.image = UIImage(named: "bg")
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.barStyle = .black
@@ -115,7 +115,7 @@ class CustomerController: BaseViewController, UIScrollViewDelegate {
         //                self.backgroundView.backgroundColor = color
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         self.backgroundView.image = UIImage(named: "bg")
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.barStyle = .black
@@ -129,7 +129,7 @@ class CustomerController: BaseViewController, UIScrollViewDelegate {
         self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: CGFloat(offset))
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
@@ -222,7 +222,7 @@ class CustomerController: BaseViewController, UIScrollViewDelegate {
 //        self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: CGFloat(offset))
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
@@ -410,7 +410,7 @@ extension CustomerController: UITableViewDelegate, UITableViewDataSource {
                 self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: offset)
                 self.navigationController?.navigationBar.tintColor = UIColor.gray
                 self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+//                UIApplication.shared.statusBarView?.backgroundColor = color
                 
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: navigationcolor]
                 self.navigationController?.navigationBar.barStyle = .default
@@ -434,7 +434,7 @@ extension CustomerController: UITableViewDelegate, UITableViewDataSource {
                 //                self.backgroundView.backgroundColor = color
                 self.navigationController?.navigationBar.tintColor = UIColor.white
                 self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+//                UIApplication.shared.statusBarView?.backgroundColor = color
                 self.backgroundView.image = UIImage(named: "bg")
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
                 self.navigationController?.navigationBar.barStyle = .black

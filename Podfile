@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '9.0'
 
 target 'flamingo-app' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -16,14 +16,19 @@ target 'flamingo-app' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
-  pod 'GoogleSignIn'
-  pod "Koyomi"
+  pod 'GoogleSignIn', '~> 4.4.0'
   pod 'MarqueeLabel'
-  
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'BiometricAuthentication'
+  pod 'SVPinView', '~> 1.0'
+  pod "Koyomi"
 #  pod 'KDCalendar'
+# Add the Firebase pod for Google Analytics
+pod 'Firebase/Analytics'
+
+# Add the pod for Firebase Cloud Messaging
+pod 'Firebase/Messaging'
 
 
   target 'flamingo-appTests' do

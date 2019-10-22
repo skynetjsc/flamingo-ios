@@ -17,9 +17,11 @@ class Preferences {
 class MenuViewController: BaseViewController {
     var isDarkModeEnabled = false
     
-    let section = ["TÀI KHOẢN", "KHÁCH SẠN", "HỆ THỐNG", "NGÔN NGỮ & TIỀN TỆ", "QUẦY THÔNG TIN"]
+//    let section = ["TÀI KHOẢN", "KHÁCH SẠN", "HỆ THỐNG", "NGÔN NGỮ & TIỀN TỆ", "QUẦY THÔNG TIN"]
+    let section = ["TÀI KHOẢN", "KHÁCH SẠN", "HỆ THỐNG"]
     
-    var items = [["TRẦN THANH TUẤN", "Hạng Chuẩn", "Quản lý thành viên"], ["Trang chủ", "Theo dõi đặt phòng", "Đánh giá của tôi", "Khách sạn yêu thích"], ["Thông báo", "Tin khuyến mãi"], ["Ngôn ngữ","Mệnh giá", "(024) 7304 6669"], ["Giới thiệu", "Đánh giá", "Hỗ trợ"]]
+//    var items = [["TRẦN THANH TUẤN", "Hạng Chuẩn", "Quản lý thành viên"], ["Trang chủ", "Theo dõi đặt phòng", "Đánh giá của tôi", "Khách sạn yêu thích"], ["Thông báo", "Tin khuyến mãi"], ["Ngôn ngữ","Mệnh giá", "(024) 7304 6669"], ["Giới thiệu", "Đánh giá", "Hỗ trợ"]]
+    var items = [["TRẦN THANH TUẤN", "Hạng Chuẩn", "Quản lý thành viên"], ["Trang chủ", "Theo dõi đặt phòng", "Đánh giá của tôi", "Khách sạn yêu thích"], ["Thông báo", "Tin khuyến mãi"]]
     
     let listMenu = ["TÀI KHOẢN", "TRẦN THANH TUẤN", "Hạng Chuẩn", "Quản lý thành viên", "KHÁCH SẠN", "Trang chủ", "Theo dõi đặt phòng", "Đánh giá của tôi", "Khách sạn yêu thích", "Khách sạn đã xem", "HỆ THỐNG", "Thông báo", "Tin khuyến mãi", "NGÔN NGỮ & TIỀN TỆ", "Ngôn ngữ","Mệnh giá", "QUẦY THÔNG TIN", "Giới thiệu", "Đánh giá", "Hỗ trợ"
     ]
@@ -109,9 +111,13 @@ class MenuViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let token = App.shared.getStringAnyObject(key: K_CURRENT_USER)
-        if token["access_token"] != nil {
-            
+//        let token = App.shared.getStringAnyObject(key: K_CURRENT_USER)
+//        if token["access_token"] != nil {
+//            
+//            
+//        }
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
             self.getUserInfo()
         }
         
@@ -119,7 +125,24 @@ class MenuViewController: BaseViewController {
     
     @objc func showUser(_ sender: UITapGestureRecognizer) {
         
-        self.performSegue(withIdentifier: "showDetailUser", sender: nil)
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            self.performSegue(withIdentifier: "showDetailUser", sender: nil)
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     
@@ -356,14 +379,41 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             } else if with == "21" {
                 self.goToScreen("PromotionNavigation")
             } else if with == "11" {
-                self.goToScreen("TrackBookController")
+//                self.goToScreen("TrackBookController")
+                guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
+                    return
+                }
+                guard let viewController = storyboard?.instantiateViewController(withIdentifier: "TrackBookController") as? NavigationController else {
+                    return
+                }
+                viewController.modalPresentationStyle = .fullScreen
+                navigationController.modalPresentationStyle = .fullScreen
+                navigationController.present(viewController, animated: true, completion: nil)
             }  else if with == "12" {
                 self.goToScreen("ListVoteController")
             } else if with == "13" {
-                let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteContentNavigation")
-                let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
-                let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-                UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+                let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                
+                if userInfo["ID"] != nil {
+                    
+                    let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteContentNavigation")
+                    let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+                    let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+                    UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+                } else {
+                    var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                                    
+                        refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                            print("Handle Ok logic here")
+                            self.performSegue(withIdentifier: "showLogin", sender: nil)
+                        }))
+                        
+                        refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                            print("Handle Cancel Logic here")
+                        }))
+                        
+                        present(refreshAlert, animated: true, completion: nil)
+                }
             } else if with == "30" {
                 self.goToScreen("LangContentNavigation")
             }  else if with == "31" {
@@ -400,14 +450,38 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func goToScreen(_ screenName: String) {
 //        sideMenuController?.hideMenu()
-        guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
-            return
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        
+        if userInfo["ID"] != nil {
+            guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
+                return
+            }
+            guard let viewController = storyboard?.instantiateViewController(withIdentifier: screenName) as? NavigationController else {
+                return
+            }
+            viewController.modalPresentationStyle = .fullScreen
+            navigationController.modalPresentationStyle = .fullScreen
+            navigationController.present(viewController, animated: true, completion: nil)
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
         }
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: screenName) as? NavigationController else {
-            return
-        }
-        navigationController.present(viewController, animated: true, completion: nil)
+        
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//    }
 }
 
 class SelectionCell: UITableViewCell {

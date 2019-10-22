@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVPinView
 
 class PaymentViewController: BaseViewController {
 
@@ -34,19 +35,55 @@ class PaymentViewController: BaseViewController {
     var email: String?
     var country: String?
     var paymentMethod: String?
+    var VerifyCode: String?
     
+    @IBOutlet var modalVerify: UIView!
+    @IBOutlet var viewParent: UIView!
+    @IBOutlet weak var code: SVPinView!
     
     
     @IBOutlet weak var txtPoint: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        self.setViewModal()
         self.usePoint.isChecked = true
         self.checkAccept.isChecked = true
     }
     
+    func animateIn(_ desiredView: UIView) {
+        
+        let backgroundView = viewParent!
+        desiredView.frame = CGRect(x: 0, y: 0, width: viewParent.frame.width, height: viewParent.frame.height)
+        backgroundView.addSubview(desiredView)
+        
+        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        desiredView.alpha = 0
+        desiredView.center = backgroundView.center
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            desiredView.alpha = 1
+        }, completion: { _ in
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
+        })
+        
+        
+    }
     
-    
+    func animateOut(_ desiredView: UIView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.alpha = 0
+        }) { _ in
+            desiredView.removeFromSuperview()
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
     
     @IBAction func payVisa(_ sender: Any) {
         if visaStatus {
@@ -132,6 +169,83 @@ class PaymentViewController: BaseViewController {
         }
     }
     
+    @IBAction func pay(_ sender: Any) {
+        
+        if self.VerifyCode == self.code.getPin() {
+            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+            var username = ""
+            if currentUser["LoginName"] != nil {
+                username = currentUser["LoginName"] as! String
+            } else {
+                username = UIDevice.current.identifierForVendor!.uuidString
+            }
+            
+            let params = [
+                "UserName" : username
+                ,"GuestName" : username
+                ,"Title" :""
+                ,"Phone" : self.phone!
+                ,"Email" : self.email!
+                ,"Address" :""
+                ,"City" :""
+                ,"State":""
+                ,"PostCode" :""
+                ,"Country" : self.country!
+                ,"Notes" :""
+                ,"PropertyRoomID" : self.PropertyRoomID!
+                ,"CheckInDate" : self.CheckInDate!
+                ,"CheckOutDate" : self.CheckOutDate!
+                ,"Adult" : self.Adult!
+                ,"Child" : self.Child!
+                ,"ChildAge" : ""
+                ,"RoomPrice" : self.RoomPrice!
+                ,"ExtraItem" : ""
+                ,"Taxes" :""
+                ,"Payment" : self.GrandTotal!
+                ,"PaymentMethodID": "2"
+                ,"Remaining" :""
+                ,"GrandTotal" : self.GrandTotal!
+                ,"ChannelBooking" :"M",
+                 "Quantity": self.Quantity!
+                ] as [String : Any]
+
+            BaseService.shared.bookRoom(params: params as [String : AnyObject]) { (status, response) in
+                self.hideProgress()
+                if status {
+                    if let _ = response["Data"] {
+                        print(response)
+                        DispatchQueue.main.async(execute: {
+                            if let result = response["Data"]!["BookingID"] {
+
+                                self.BookingID = "\(String(describing: result!))"
+                                print(self.BookingID)
+                                self.performSegue(withIdentifier: "paymentPoint", sender: nil)
+
+                            }  else {
+                                self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                            }
+                        })
+
+
+                    } else {
+                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                    }
+                } else {
+                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                }
+            }
+        } else {
+           self.showMessage(title: "Flamingo", message: "Mã xác thực không chính xác")
+       }
+        
+    }
+    
+    @IBAction func backModal(_ sender: Any) {
+        
+        self.animateOut(modalVerify)
+    }
+    
+    
     @IBAction func nextPayment(_ sender: Any) {
         
         if (self.checkAccept.isChecked == false) {
@@ -148,62 +262,85 @@ class PaymentViewController: BaseViewController {
                 
                 refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
                     print("Handle Ok logic here")
+                    self.animateIn(self.modalVerify)
                     let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-                    
-                    let params = [
-                        "UserName" : currentUser["LoginName"]
-                        ,"GuestName" : currentUser["LoginName"]
-                        ,"Title" :""
-                        ,"Phone" : self.phone!
-                        ,"Email" : self.email!
-                        ,"Address" :""
-                        ,"City" :""
-                        ,"State":""
-                        ,"PostCode" :""
-                        ,"Country" : self.country!
-                        ,"Notes" :""
-                        ,"PropertyRoomID" : self.PropertyRoomID!
-                        ,"CheckInDate" : self.CheckInDate!
-                        ,"CheckOutDate" : self.CheckOutDate!
-                        ,"Adult" : self.Adult!
-                        ,"Child" : self.Child!
-                        ,"ChildAge" : ""
-                        ,"RoomPrice" : self.RoomPrice!
-                        ,"ExtraItem" : ""
-                        ,"Taxes" :""
-                        ,"Payment" : self.GrandTotal!
-                        ,"PaymentMethodID": "2"
-                        ,"Remaining" :""
-                        ,"GrandTotal" : self.GrandTotal!
-                        ,"ChannelBooking" :"M",
-                         "Quantity": self.Quantity!
+                    let paramVerify = [
+                        "Telephone": self.phone,
+                        "VerifyType": "1"
                         ] as [String : Any]
-                    
-                    BaseService.shared.bookRoom(params: params as [String : AnyObject]) { (status, response) in
+                    BaseService.shared.verifyCode(params: paramVerify as [String : AnyObject]) { (status, response) in
                         self.hideProgress()
                         if status {
-                            if let _ = response["Data"] {
-                                print(response)
-                                DispatchQueue.main.async(execute: {
-                                    if let result = response["Data"]!["BookingID"] {
-                                        
-                                        self.BookingID = "\(String(describing: result!))"
-                                        print(self.BookingID)
-                                        self.performSegue(withIdentifier: "paymentPoint", sender: nil)
-                                        
-                                    }  else {
-                                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
-                                    }
-                                })
-                                
-                                
+                            print(response)
+                            if let _ = response["Data"]!["ID"] {
+                                self.VerifyCode = "\(String(describing: response["Data"]!["VerifyCode"]!!))"
+
                             } else {
                                 self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
                             }
+
                         } else {
                             self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                         }
                     }
+
+                    
+//                    let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+//
+//                    let params = [
+//                        "UserName" : currentUser["LoginName"]
+//                        ,"GuestName" : currentUser["LoginName"]
+//                        ,"Title" :""
+//                        ,"Phone" : self.phone!
+//                        ,"Email" : self.email!
+//                        ,"Address" :""
+//                        ,"City" :""
+//                        ,"State":""
+//                        ,"PostCode" :""
+//                        ,"Country" : self.country!
+//                        ,"Notes" :""
+//                        ,"PropertyRoomID" : self.PropertyRoomID!
+//                        ,"CheckInDate" : self.CheckInDate!
+//                        ,"CheckOutDate" : self.CheckOutDate!
+//                        ,"Adult" : self.Adult!
+//                        ,"Child" : self.Child!
+//                        ,"ChildAge" : ""
+//                        ,"RoomPrice" : self.RoomPrice!
+//                        ,"ExtraItem" : ""
+//                        ,"Taxes" :""
+//                        ,"Payment" : self.GrandTotal!
+//                        ,"PaymentMethodID": "2"
+//                        ,"Remaining" :""
+//                        ,"GrandTotal" : self.GrandTotal!
+//                        ,"ChannelBooking" :"M",
+//                         "Quantity": self.Quantity!
+//                        ] as [String : Any]
+//
+//                    BaseService.shared.bookRoom(params: params as [String : AnyObject]) { (status, response) in
+//                        self.hideProgress()
+//                        if status {
+//                            if let _ = response["Data"] {
+//                                print(response)
+//                                DispatchQueue.main.async(execute: {
+//                                    if let result = response["Data"]!["BookingID"] {
+//
+//                                        self.BookingID = "\(String(describing: result!))"
+//                                        print(self.BookingID)
+//                                        self.performSegue(withIdentifier: "paymentPoint", sender: nil)
+//
+//                                    }  else {
+//                                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+//                                    }
+//                                })
+//
+//
+//                            } else {
+//                                self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+//                            }
+//                        } else {
+//                            self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+//                        }
+//                    }
                 }))
                 
                 refreshAlert.addAction(UIAlertAction(title: "Quay lại", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -251,8 +388,12 @@ class PaymentViewController: BaseViewController {
         super.viewWillAppear(animated)
         let userInfo = App.shared.getStringAnyObject(key: "USER_INFO")
         print(userInfo)
-        let point = userInfo["Point"]!
-        print(point)
+        var point = "0"
+
+        if userInfo["Point"] != nil {
+            point = userInfo["Point"]! as! String
+
+        }
         var textPoint = String(describing: point)
         if textPoint.elementsEqual("<null>") || textPoint.elementsEqual("") {
             textPoint = "0"

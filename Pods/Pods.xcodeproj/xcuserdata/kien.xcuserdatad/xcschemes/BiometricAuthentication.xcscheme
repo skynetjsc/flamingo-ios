@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4188BE3CEBB4FDDC6825BAEA7BE8113E"
+               BlueprintIdentifier = "EF797B133BE0838BB34A1DDD2E19679A"
                BuildableName = "BiometricAuthentication.framework"
                BlueprintName = "BiometricAuthentication"
                ReferencedContainer = "container:Pods.xcodeproj">

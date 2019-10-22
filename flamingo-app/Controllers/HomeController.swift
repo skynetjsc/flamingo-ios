@@ -8,7 +8,6 @@
 
 import UIKit
 import VisualEffectView
-import Koyomi
 import SideMenuSwift
 import GoogleMaps
 import GooglePlaces
@@ -32,6 +31,7 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
     var listFalshSale = [[String: Any]]()
     var listHistory = [[String: Any]]()
     var listRoom = [[String: Any]]()
+    var listNews = [[String: Any]]()
     
     var BookingID: String? = nil
     var textPoint: String?
@@ -46,20 +46,21 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
     var PropertyRoomID: String?
     
     @IBOutlet var viewParent: UIView!
-    @IBOutlet var popupChosseDate: UIView!
-    @IBOutlet weak var bgPopKoyomi: VisualEffectView!
-    @IBOutlet weak var segementedMonth: UISegmentedControl!
+//    @IBOutlet var popupChosseDate: UIView!
+//    @IBOutlet weak var bgPopKoyomi: VisualEffectView!
+//    @IBOutlet weak var segementedMonth: UISegmentedControl!
     
-    @IBOutlet weak var bgPopupChosseDate: VisualEffectView!
-    @IBOutlet weak var startDayAndMonth: UILabel!
-    @IBOutlet weak var endDayAndMonth: UILabel!
-    @IBOutlet weak var startDayOfWeek: UILabel!
-    @IBOutlet weak var endDayOfWeek: UILabel!
+//    @IBOutlet weak var bgPopupChosseDate: VisualEffectView!
+//    @IBOutlet weak var startDayAndMonth: UILabel!
+//    @IBOutlet weak var endDayAndMonth: UILabel!
+//    @IBOutlet weak var startDayOfWeek: UILabel!
+//    @IBOutlet weak var endDayOfWeek: UILabel!
     
     var choseStartDate = true
     var dataPromotion = [String: Any]()
+    var dataNews = [String: Any]()
     
-    @IBOutlet weak var koyomi: Koyomi!
+    
     
     @IBAction func onTapMenuAction(_ sender: UIBarButtonItem) {
         self.sideMenuController?.revealMenu()
@@ -100,7 +101,7 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
         
         self.locationManager.delegate = self
         self.setViewModal()
-        self.setupKoyomi()
+//        self.setupKoyomi()
         
         let date = Date()
         let calendar = Calendar.current
@@ -121,17 +122,17 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
         self.valStartFormatDate = calendar.date(from:componentOne)
         self.valEndFormatDate = calendar.date(from:componentTwo)
         
-        if weekdayStart != 1 {
-            self.startDayOfWeek.text = "Thứ \(weekdayStart)"
-        } else {
-            self.startDayOfWeek.text = "Chủ nhật"
-        }
-        
-        if weekdayEnd != 1 {
-            self.endDayOfWeek.text = "Thứ \(weekdayEnd)"
-        } else {
-            self.endDayOfWeek.text = "Chủ nhật"
-        }
+//        if weekdayStart != 1 {
+//            self.startDayOfWeek.text = "Thứ \(weekdayStart)"
+//        } else {
+//            self.startDayOfWeek.text = "Chủ nhật"
+//        }
+//
+//        if weekdayEnd != 1 {
+//            self.endDayOfWeek.text = "Thứ \(weekdayEnd)"
+//        } else {
+//            self.endDayOfWeek.text = "Chủ nhật"
+//        }
         
         
         self.startDate = "\(day)/\(month!)/\(year!)"
@@ -145,14 +146,14 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
         
         if let startDateFormat = dateFormatterGet.date(from: self.startDate!) {
             self.startDate = dateFormatterPrint.string(from: startDateFormat)
-            self.startDayAndMonth.text = dateFormatterPrint.string(from: startDateFormat)
+//            self.startDayAndMonth.text = dateFormatterPrint.string(from: startDateFormat)
         } else {
             print("There was an error decoding the string")
         }
         
         if let endDateFormat = dateFormatterGet.date(from: self.endDate!) {
             self.endDate = dateFormatterPrint.string(from: endDateFormat)
-            self.endDayAndMonth.text = dateFormatterPrint.string(from: endDateFormat)
+//            self.endDayAndMonth.text = dateFormatterPrint.string(from: endDateFormat)
         } else {
             print("There was an error decoding the string")
         }
@@ -199,110 +200,149 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
     }
     
     @IBAction func setting(_ sender: Any) {
-        let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SetupContentNavigation")
-        let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
-        let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-        UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            
+            let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SetupContentNavigation")
+            let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+            let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+            UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func favorite(_ sender: Any) {
-        let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteContentNavigation")
-        let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
-        let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-        UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            let contentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteContentNavigation")
+            let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuNavigation")
+            let sideMenuController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
+            UIApplication.shared.keyWindow?.rootViewController = sideMenuController
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func card(_ sender: Any) {
-        self.performSegue(withIdentifier: "showCard", sender: nil)
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            self.performSegue(withIdentifier: "showCard", sender: nil)
+            
+            App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
         
-        App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
     }
     
     //GET DATA
     
-    @IBAction func chosseDate(_ sender: Any) {
-        self.choseStartDate = true
-        if self.choseStartDate {
-            self.startDayOfWeek.isHidden = false
-            self.startDayAndMonth.isHidden = false
-            self.endDayOfWeek.isHidden = true
-            self.endDayAndMonth.isHidden = true
-        }
-        self.animateIn(popupChosseDate)
-        
-    }
-    
-    
-    @IBAction func choseEndDate(_ sender: Any) {
-        self.choseStartDate = false
-        if !self.choseStartDate {
-            self.startDayOfWeek.isHidden = true
-            self.startDayAndMonth.isHidden = true
-            self.endDayOfWeek.isHidden = false
-            self.endDayAndMonth.isHidden = false
-        }
-        self.animateIn(popupChosseDate)
-    }
-    
-    @IBAction func closeChosseDate(_ sender: Any) {
-        self.animateOut(popupChosseDate)
-    }
-    
-    @IBAction func selectDate(_ sender: Any) {
-//        let calendar = Calendar.current
-//        let components = calendar.dateComponents([.day], from: self.valStartFormatDate!, to: self.valEndFormatDate!)
-//        if components.day! <= 0 {
-//            self.showMessage(title: "Flamingo", message: "Vui lòng chọn lại ngày nhận và trả")
-//        } else {
-            self.animateOut(popupChosseDate)
-            self.tableView.reloadData()
+//    @IBAction func chosseDate(_ sender: Any) {
+//        self.choseStartDate = true
+//        if self.choseStartDate {
+//            self.startDayOfWeek.isHidden = false
+//            self.startDayAndMonth.isHidden = false
+//            self.endDayOfWeek.isHidden = true
+//            self.endDayAndMonth.isHidden = true
 //        }
-        
-    }
+//        self.animateIn(popupChosseDate)
+//
+//    }
+//
+//
+//    @IBAction func choseEndDate(_ sender: Any) {
+//        self.choseStartDate = false
+//        if !self.choseStartDate {
+//            self.startDayOfWeek.isHidden = true
+//            self.startDayAndMonth.isHidden = true
+//            self.endDayOfWeek.isHidden = false
+//            self.endDayAndMonth.isHidden = false
+//        }
+//        self.animateIn(popupChosseDate)
+//    }
+//
+//    @IBAction func closeChosseDate(_ sender: Any) {
+//        self.animateOut(popupChosseDate)
+//    }
+//
+//    @IBAction func selectDate(_ sender: Any) {
+////        let calendar = Calendar.current
+////        let components = calendar.dateComponents([.day], from: self.valStartFormatDate!, to: self.valEndFormatDate!)
+////        if components.day! <= 0 {
+////            self.showMessage(title: "Flamingo", message: "Vui lòng chọn lại ngày nhận và trả")
+////        } else {
+//            self.animateOut(popupChosseDate)
+//            self.tableView.reloadData()
+////        }
+//
+//    }
     
     
     func setupKoyomi(){
         
-        
-        
-        koyomi.circularViewDiameter = 0.5
-        koyomi.calendarDelegate = self as KoyomiDelegate
-        koyomi.inset = UIEdgeInsets(top: 0.5, left: 0.5, bottom: 0.5, right: 0.5)
-        koyomi.weeks = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
-        koyomi.dayBackgrondColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0)
-        koyomi.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0)
-        koyomi.dayPosition = .center
-//        koyomi.selectionMode = .sequence(style: .semicircleEdge)
-        koyomi.selectedStyleColor = UIColor(red: 242/255, green: 94/255, blue: 28/255, alpha: 1)
-        koyomi
-            .setDayFont(size: 14)
-            .setWeekFont(size: 0)
-        
     }
     
     func setViewModal() {
-        bgPopupChosseDate.colorTintAlpha = 0.7
-        bgPopupChosseDate.blurRadius = 3
-        bgPopupChosseDate.scale = 1
-        
-        bgPopKoyomi.colorTintAlpha = 0.7
-        bgPopKoyomi.blurRadius = 4
-        bgPopKoyomi.scale = 1
-        
-        segementedMonth.backgroundColor = .clear
-        segementedMonth.tintColor = .clear
-        
-        segementedMonth.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.lightGray
-            ], for: .normal)
-        
-        segementedMonth.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.orange
-            ], for: .selected)
-        
-        segementedMonth.layer.borderWidth = 0
-        
-        segementedMonth.layer.masksToBounds = true
+//        bgPopupChosseDate.colorTintAlpha = 0.7
+//        bgPopupChosseDate.blurRadius = 3
+//        bgPopupChosseDate.scale = 1
+//
+//        bgPopKoyomi.colorTintAlpha = 0.7
+//        bgPopKoyomi.blurRadius = 4
+//        bgPopKoyomi.scale = 1
+//
+//        segementedMonth.backgroundColor = .clear
+//        segementedMonth.tintColor = .clear
+//
+//        segementedMonth.setTitleTextAttributes([
+//            NSAttributedString.Key.foregroundColor: UIColor.lightGray
+//            ], for: .normal)
+//
+//        segementedMonth.setTitleTextAttributes([
+//            NSAttributedString.Key.foregroundColor: UIColor.orange
+//            ], for: .selected)
+//
+//        segementedMonth.layer.borderWidth = 0
+//
+//        segementedMonth.layer.masksToBounds = true
     }
     
     
@@ -353,8 +393,8 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
             desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             desiredView.alpha = 1
         }, completion: { _ in
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = true
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
         })
         
         
@@ -366,8 +406,8 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
             desiredView.alpha = 0
         }) { _ in
             desiredView.removeFromSuperview()
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = false
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
@@ -407,7 +447,11 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
             if let vc: DetailPromotionViewController = segue.destination as? DetailPromotionViewController {
                 vc.data = self.dataPromotion
             }
-        }
+        } else if segue.identifier == "showDetailNews" {
+           if let viewController: DetailNewsViewController = segue.destination as? DetailNewsViewController {
+               viewController.data = self.dataNews
+           }
+       }
     }
     
     // GET DATA
@@ -456,6 +500,35 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
             }
         }
 
+    }
+    
+    func getListNews() {
+        let params = [
+            "NewTypeID": "1"
+        ]
+        BaseService.shared.listNews(params: params as [String : AnyObject]) { (status, response) in
+            self.hideProgress()
+            if status {
+                if let _ = response["Data"]{
+                    
+                    DispatchQueue.main.async(execute: {
+                        if let listNews = response["Data"]! as? [[String: Any]] {
+                            self.listNews = listNews
+                        }
+                        
+                        self.tableView.reloadData()
+                    })
+                    
+                    
+                    
+                    
+                } else {
+                    self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                }
+            } else {
+                self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+            }
+        }
     }
     
     func getUserInfo(_ refresh: Bool) {
@@ -508,7 +581,11 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupMenu(menuView)
-        self.getUserInfo(true)
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            self.getUserInfo(true)
+        }
+        self.getListNews()
         self.getInfoHome(true)
         self.tableView.backgroundColor = .clear
         
@@ -518,7 +595,7 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
         //                self.backgroundView.backgroundColor = color
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         self.backgroundView.image = UIImage(named: "bg_home")
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.barStyle = .black
@@ -547,7 +624,7 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
         self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: CGFloat(offset))
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
@@ -562,7 +639,7 @@ class HomeController: BaseViewController, GMSMapViewDelegate, CLLocationManagerD
         self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: CGFloat(offset))
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
@@ -584,6 +661,9 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
             countRow = countRow + 1
         }
         if self.listFalshSale.count > 0 {
+            countRow = countRow + 1
+        }
+        if self.listNews.count > 0 {
             countRow = countRow + 1
         }
         
@@ -617,6 +697,12 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
                 cell.point.text = Int(self.textPoint!)?.formattedWithSeparator
             }
             
+            let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+            
+            if userInfo["ID"] != nil {
+                cell.btnLogin.isHidden = true
+            }
+            
             return cell
         }
         else if row == 1 {
@@ -632,8 +718,21 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
             cell.collectionView.reloadData()
 
             return cell
+        } else if row == 2 {
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
+            cell.data = self.listNews
+            cell.callback = { recived in
+                self.dataNews = recived
+                self.performSegue(withIdentifier: "showDetailNews", sender: nil)
+                
+                App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
+            }
+            cell.collectionView.reloadData()
+
+            return cell
         }
-        else if row == 2{
+        else if row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LastBookViewCell", for: indexPath) as! LastBookViewCell
             cell.data = self.listHistory
             
@@ -653,7 +752,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
             
             cell.collectionView.reloadData()
             return cell
-        } else if row == 3 && self.listRoom.count > 0 {
+        } else if row == 4 && self.listRoom.count > 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecommendTableViewCell", for: indexPath) as! RecommendTableViewCell
             cell.data = self.listRoom
             cell.delegate = self
@@ -701,15 +800,53 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
     
     
     @objc func viewShowReciptDetail(_ sender: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: "showDetailUser", sender: nil)
         
-        App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            self.performSegue(withIdentifier: "showDetailUser", sender: nil)
+
+            App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
+        
     }
     
     @objc func viewListReceipt(_ sender: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: "showListReciept", sender: nil)
         
-        App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
+        
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
+            
+            self.performSegue(withIdentifier: "showListReciept", sender: nil)
+            
+            App.shared.save(value: "false" as AnyObject, forKey: "RELOAD")
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     
@@ -730,6 +867,10 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
             self.view.layoutIfNeeded()
             return 220
         } else if indexPath.row == 3{
+            self.tableViewHeight.constant = self.tableView.contentSize.height + 220
+            self.view.layoutIfNeeded()
+            return 220
+        } else if indexPath.row == 4{
             self.tableViewHeight.constant = self.tableView.contentSize.height + 255
             self.view.layoutIfNeeded()
             return 255
@@ -761,7 +902,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
                 self.tableView.backgroundColor = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: offset)
                 self.navigationController?.navigationBar.tintColor = UIColor.gray
                 self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+//                UIApplication.shared.statusBarView?.backgroundColor = color
                 
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: navigationcolor]
                 self.navigationController?.navigationBar.barStyle = .default
@@ -784,7 +925,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
 //                self.backgroundView.backgroundColor = color
                 self.navigationController?.navigationBar.tintColor = UIColor.white
                 self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+//                UIApplication.shared.statusBarView?.backgroundColor = color
                 self.backgroundView.image = UIImage(named: "bg_home")
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
                 self.navigationController?.navigationBar.barStyle = .black
@@ -852,112 +993,4 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, MyDelegate
 }
 
 
-extension HomeController: KoyomiDelegate {
-    func koyomi(_ koyomi: Koyomi, didSelect date: Date?, forItemAt indexPath: IndexPath) {
-//        print(indexPath)
-//        print(date as Any)
-    }
-    
-    func koyomi(_ koyomi: Koyomi, shouldSelectDates date: Date?, to toDate: Date?, withPeriodLength length: Int) -> Bool {
-        let calendar = Calendar.current
-        
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "d/M/y"
-        
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "dd/MM/yyyy"
-        if date != nil {
-            if choseStartDate {
-                let start = calendar.dateComponents([.year, .month, .day], from: date!)
-                let year =  start.year
-                let month = start.month
-                let day = start.day
-                let weekday = Calendar.current.component(.weekday, from: date!)
-                self.valStartFormatDate = calendar.date(from:start)
-//                self.startDayAndMonth.text = "\(startday!) Tháng \(startmonth!)"
-//                self.startDate = "\(startday!) Tháng \(startmonth!)"
-                
-//                self.valStartDate = "\(startday!)-\(startmonth!)-\(startyear!)"
-                if weekday != 1 {
-                    self.startDayOfWeek.text = "Thứ \(weekday)"
-                } else {
-                    self.startDayOfWeek.text = "Chủ nhật"
-                }
-                
-                self.startDate = "\(day!)/\(month!)/\(year!)"
-                
-                self.valStartDate = "\(day!)-\(month!)-\(year!)"
-                
-                
-                
-                if let startDateFormat = dateFormatterGet.date(from: self.startDate!) {
-                    self.startDate = dateFormatterPrint.string(from: startDateFormat)
-                    self.startDayAndMonth.text = dateFormatterPrint.string(from: startDateFormat)
-                } else {
-                    print("There was an error decoding the string")
-                }
-                
-                
-                if let valStartDateFormat = dateFormatterGet.date(from: self.valStartDate!) {
-                    self.valStartDate = dateFormatterPrint.string(from: valStartDateFormat)
-                } else {
-                    print("There was an error decoding the string")
-                }
-                
-            } else {
-                let end = calendar.dateComponents([.year, .month, .day], from: date!)
-                
-                let weekday = Calendar.current.component(.weekday, from: date!)
-                let year =  end.year
-                let month = end.month
-                let day = end.day
-                
-                self.valEndFormatDate = calendar.date(from:end)
-                self.endDayAndMonth.text = "\(day!) Tháng \(month!)"
-                self.valEndDate = "\(day!)-\(month!)-\(year!)"
-                self.endDate = "\(day!) Tháng \(month!)"
-                if weekday != 1 {
-                    self.endDayOfWeek.text = "Thứ \(weekday)"
-                } else {
-                    self.endDayOfWeek.text = "Chủ nhật"
-                }
-                
-                
-                self.endDate = "\(day!)/\(month!)/\(year!)"
-                self.valEndDate = "\(day!)-\(month!)-\(year!)"
-                
-                if let endDateFormat = dateFormatterGet.date(from: self.endDate!) {
-                    self.endDate = dateFormatterPrint.string(from: endDateFormat)
-                    self.endDayAndMonth.text = dateFormatterPrint.string(from: endDateFormat)
-                } else {
-                    print("There was an error decoding the string")
-                }
-                
-                if let valEndDateFormat = dateFormatterGet.date(from: self.valEndDate!) {
-                    self.valEndDate = dateFormatterPrint.string(from: valEndDateFormat)
-                } else {
-                    print("There was an error decoding the string")
-                }
-                
-            }
-        }
-        
-        
-//        if date != nil {
-        
-            
-//            if let startDayAndMonthFormat = dateFormatterGet.date(from: self.startDayAndMonth!) {
-//                self.startDayAndMonth.text = dateFormatterPrint.string(from: startDayAndMonthFormat)
-//            } else {
-//                print("There was an error decoding the string")
-//            }
-            
-//        }
-//
-//        if toDate != nil {
-//
-//        }
-        return true
-    }
-}
 

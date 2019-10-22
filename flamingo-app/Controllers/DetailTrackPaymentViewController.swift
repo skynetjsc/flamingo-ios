@@ -9,9 +9,10 @@
 import UIKit
 import Cosmos
 import VisualEffectView
+import SVPinView
 class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var BookingID: String?
+    var BookingID: String? = "382"
     var listBook = [String: Any]()
     
     @IBOutlet weak var bookID: UILabel!
@@ -37,12 +38,18 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
     var checkInDate: Date?
     var checkOutDate: Date?
     var PropertyRoomID: String?
+    var VerifyCode: String?
     @IBOutlet weak var btnRating: UIButton!
     
     @IBOutlet weak var starRate: CosmosView!
     @IBOutlet weak var commentRate: UITextView!
     
     @IBOutlet weak var collectionViewUtilities: UICollectionView!
+    
+    @IBOutlet var modalVerify: UIView!
+    @IBOutlet weak var code: SVPinView!
+    
+    
     
      var ListUtilities = [[String: Any]]()
     override func viewDidLoad() {
@@ -51,7 +58,7 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
         title = "CHI TIẾT ĐẶT PHÒNG"
         
 //        self.navigationItem.hidesBackButton = true
-//        let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backNav(_:)))
+//        let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back(_:)))
 //        self.navigationItem.leftBarButtonItem = newBackButton
         
 //        let button: UIButton = UIButton(type: .custom)
@@ -68,8 +75,25 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
         
         self.collectionViewUtilities.delegate = self
         self.collectionViewUtilities.dataSource = self
+//        let button = UIButton(frame: CGRect(x: view.frame.width / 2, y: view.frame.height / 2, width: 40, height: 40))
+////        button.backgroundColor = .red
+////        button.tintColor = .white
+//        button.setTitle("CHI TIẾT ĐẶT PHÒNG", for: .normal)
+//        button.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
+//        view.addSubview(button)
     }
     
+    @objc func back(_ sender: UIBarButtonItem) {
+        guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
+            return
+        }
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "TrackBookPaymentController") as? NavigationController else {
+            return
+        }
+        navigationController.modalPresentationStyle = .fullScreen
+        viewController.modalPresentationStyle = .fullScreen
+        navigationController.present(viewController, animated: true, completion: nil)
+    }
     
     @IBAction func backList(_ sender: Any) {
         guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
@@ -78,34 +102,38 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: "TrackBookPaymentController") as? NavigationController else {
             return
         }
+        navigationController.modalPresentationStyle = .fullScreen
+        viewController.modalPresentationStyle = .fullScreen
         navigationController.present(viewController, animated: true, completion: nil)
     }
     
     
-    @objc func backNav(_ sender: UIBarButtonItem) {
-        //        if BookingID.elementsEqual("0") {
-        //            _ = navigationController?.popViewController(animated: true)
-        //        }
-        
-        //        if BookingID != nil{
-                    guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
-                        return
-                    }
-                    guard let viewController = storyboard?.instantiateViewController(withIdentifier: "TrackBookPaymentController") as? NavigationController else {
-                        return
-                    }
-                    navigationController.present(viewController, animated: true, completion: nil)
-        
-        //
-        //
-        //        } else {
-//        _ = navigationController?.popViewController(animated: true)
-        //        }
-        
-        blurRating.colorTintAlpha = 0.7
-        blurRating.blurRadius = 3
-        blurRating.scale = 1
-    }
+//    @objc func backNav(_ sender: UIBarButtonItem) {
+//        //        if BookingID.elementsEqual("0") {
+//        //            _ = navigationController?.popViewController(animated: true)
+//        //        }
+//        
+//        //        if BookingID != nil{
+//                    guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
+//                        return
+//                    }
+//                    guard let viewController = storyboard?.instantiateViewController(withIdentifier: "TrackBookPaymentController") as? NavigationController else {
+//                        return
+//                    }
+//                    navigationController.modalPresentationStyle = .fullScreen
+//                    viewController.modalPresentationStyle = .fullScreen
+//                    navigationController.present(viewController, animated: true, completion: nil)
+//        
+//        //
+//        //
+//        //        } else {
+////        _ = navigationController?.popViewController(animated: true)
+//        //        }
+//        
+//        blurRating.colorTintAlpha = 0.7
+//        blurRating.blurRadius = 3
+//        blurRating.scale = 1
+//    }
     
     //    @IBAction func backAction(_ sender: Any) {
     //        self.dismiss(animated: true, completion: nil)
@@ -213,8 +241,8 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
             desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             desiredView.alpha = 1
         }, completion: { _ in
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = true
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
         })
         
         
@@ -226,8 +254,8 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
             desiredView.alpha = 0
         }) { _ in
             desiredView.removeFromSuperview()
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = false
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
@@ -391,12 +419,13 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
         }
     }
     
-    @IBAction func cancelBooking(_ sender: Any) {
-        let refreshAlert = UIAlertController(title: "XÁC NHẬN HUỶ PHÒNG", message: "Bạn chắc chắn muốn huỷ phòng này", preferredStyle: UIAlertController.Style.alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
-            print("Handle Ok logic here")
-            
+    @IBAction func closeVerify(_ sender: Any) {
+        self.animateOut(modalVerify)
+    }
+    
+    
+    @IBAction func verify(_ sender: Any) {
+        if VerifyCode == code.getPin() {
             let params = [
                 "BookingID": self.BookingID!
                 ] as [String : Any]
@@ -438,13 +467,55 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
                     self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                 }
             }
-        }))
+        }
+    }
+    
+    
+    @IBAction func cancelBooking(_ sender: Any) {
         
-        refreshAlert.addAction(UIAlertAction(title: "Quay lại", style: .cancel, handler: { (action: UIAlertAction!) in
-            print("Handle Cancel Logic here")
-        }))
+        guard let navigationController = sideMenuController?.contentViewController as? UINavigationController else {
+            return
+        }
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "TrackBookPaymentController") as? NavigationController else {
+            return
+        }
+        navigationController.modalPresentationStyle = .fullScreen
+        viewController.modalPresentationStyle = .fullScreen
+        navigationController.present(viewController, animated: true, completion: nil)
         
-        present(refreshAlert, animated: true, completion: nil)
+//        let refreshAlert = UIAlertController(title: "XÁC NHẬN HUỶ PHÒNG", message: "Bạn chắc chắn muốn huỷ phòng này", preferredStyle: UIAlertController.Style.alert)
+//
+//        refreshAlert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action: UIAlertAction!) in
+//            print("Handle Ok logic here")
+//            self.animateIn(self.modalVerify)
+//            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+//            let paramVerify = [
+//                "Telephone": currentUser["LoginName"],
+//                "VerifyType": "1"
+//                ] as [String : Any]
+//            BaseService.shared.verifyCode(params: paramVerify as [String : AnyObject]) { (status, response) in
+//                self.hideProgress()
+//                if status {
+//                    print(response)
+//                    if let _ = response["Data"]!["ID"] {
+//                        self.VerifyCode = "\(String(describing: response["Data"]!["VerifyCode"]!!))"
+//
+//                    } else {
+//                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+//                    }
+//
+//                } else {
+//                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+//                }
+//            }
+//
+//        }))
+//
+//        refreshAlert.addAction(UIAlertAction(title: "Quay lại", style: .cancel, handler: { (action: UIAlertAction!) in
+//            print("Handle Cancel Logic here")
+//        }))
+//
+//        present(refreshAlert, animated: true, completion: nil)
     }
     
     @IBAction func ratingBook(_ sender: Any) {
@@ -460,9 +531,14 @@ class DetailTrackPaymentViewController: BaseViewController, UICollectionViewDele
         
         
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
+        
+        
         let params = [
-            "Username": currentUser["LoginName"],
-            //            "PropertyID": self.BookingID!,
+            "Username": username,
             "PropertyRoomID": self.PropertyRoomID,
             "Notes": self.commentRate.text,
             "Star": self.starRate.rating

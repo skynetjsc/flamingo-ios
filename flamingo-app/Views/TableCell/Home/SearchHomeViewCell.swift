@@ -24,6 +24,9 @@ class SearchHomeViewCell: UITableViewCell {
     
     @IBOutlet weak var point: UILabel!
     
+    @IBOutlet weak var btnLogin: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

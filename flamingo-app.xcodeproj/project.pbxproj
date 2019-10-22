@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,8 +31,9 @@
 		9D01FE5F23168B0F00338A6F /* FlashSalesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01FE5E23168B0F00338A6F /* FlashSalesCollection.swift */; };
 		9D01FE6123168B2200338A6F /* FlashSalesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01FE6023168B2200338A6F /* FlashSalesCollectionViewCell.swift */; };
 		9D01FE632316EE4200338A6F /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01FE622316EE4200338A6F /* CheckBox.swift */; };
+		9D01FEB623596F4200134B23 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D01FEB523596F4100134B23 /* GoogleService-Info.plist */; };
+		9D021689235D5DF400BE06E4 /* RulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D021688235D5DF400BE06E4 /* RulesController.swift */; };
 		9D0959EB232D0E1200DC259A /* TrackBookPaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0959EA232D0E1200DC259A /* TrackBookPaymentController.swift */; };
-		9D0A175123278CD40051EF94 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D0A175023278CD30051EF94 /* GoogleService-Info.plist */; };
 		9D11030B231A8F000064004B /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D11030A231A8F000064004B /* TrackCollectionViewCell.swift */; };
 		9D11030D231A8F850064004B /* DetailTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D11030C231A8F850064004B /* DetailTrackViewController.swift */; };
 		9D11030F231B52EC0064004B /* CustomerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D11030E231B52EC0064004B /* CustomerNavigationController.swift */; };
@@ -99,6 +100,8 @@
 		9D3C3C6C2310321B0084823B /* FormSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C3C6B2310321B0084823B /* FormSearchTableViewCell.swift */; };
 		9D3C3C6E231032360084823B /* CountRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C3C6D231032360084823B /* CountRoomTableViewCell.swift */; };
 		9D3C3C702310324C0084823B /* ListRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C3C6F2310324C0084823B /* ListRoomTableViewCell.swift */; };
+		9D548544233CA6A800D33A6F /* UpdateFullNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D548543233CA6A800D33A6F /* UpdateFullNameViewController.swift */; };
+		9D548546233CA6CA00D33A6F /* UpdateUserInfoLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D548545233CA6CA00D33A6F /* UpdateUserInfoLastViewController.swift */; };
 		9D756FC7231E2BEE001084BB /* PromotionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D756FC6231E2BEE001084BB /* PromotionCollectionCell.swift */; };
 		9D756FC9231E3438001084BB /* DetailPromotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D756FC8231E3438001084BB /* DetailPromotionViewController.swift */; };
 		9D756FCB231E3538001084BB /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D756FCA231E3538001084BB /* UserViewController.swift */; };
@@ -126,6 +129,8 @@
 		9D8EB738231EB7A000D63EB8 /* ListRecieptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EB737231EB7A000D63EB8 /* ListRecieptViewController.swift */; };
 		9D8EB73A231EB7BC00D63EB8 /* DetailRecieptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EB739231EB7BC00D63EB8 /* DetailRecieptViewController.swift */; };
 		9D8EB73D231EBCA700D63EB8 /* ListReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EB73C231EBCA700D63EB8 /* ListReceiptTableViewCell.swift */; };
+		9D9CCB8C2353823500D9EA55 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9CCB8B2353823500D9EA55 /* NewsTableViewCell.swift */; };
+		9D9CCB8E235391FE00D9EA55 /* NewsHomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9CCB8D235391FE00D9EA55 /* NewsHomeCollectionViewCell.swift */; };
 		9DC1A127232C418800937054 /* UserDetailMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC1A126232C418800937054 /* UserDetailMenu.swift */; };
 		9DD0A2AE232325CE0055C4F5 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0A2AD232325CE0055C4F5 /* ChangePasswordViewController.swift */; };
 		9DD0A2B0232331320055C4F5 /* LangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0A2AF232331320055C4F5 /* LangViewController.swift */; };
@@ -154,6 +159,9 @@
 		9DD91559230948FF00053D74 /* DetailNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD91558230948FF00053D74 /* DetailNotificationController.swift */; };
 		9DD9155B230949D900053D74 /* ListPromotionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9155A230949D900053D74 /* ListPromotionController.swift */; };
 		9DD9155D23094A0C00053D74 /* DetailPromotionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9155C23094A0C00053D74 /* DetailPromotionController.swift */; };
+		9DEEA58723390D0900C90E49 /* VerifyIOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEEA58623390D0900C90E49 /* VerifyIOTPViewController.swift */; };
+		9DEEA589233921A300C90E49 /* UpdateUserInfoRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEEA588233921A300C90E49 /* UpdateUserInfoRegisterViewController.swift */; };
+		9DEEA58E2339464C00C90E49 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEEA58D2339464C00C90E49 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,8 +222,9 @@
 		9D01FE5E23168B0F00338A6F /* FlashSalesCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashSalesCollection.swift; sourceTree = "<group>"; };
 		9D01FE6023168B2200338A6F /* FlashSalesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashSalesCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D01FE622316EE4200338A6F /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		9D01FEB523596F4100134B23 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9D021688235D5DF400BE06E4 /* RulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesController.swift; sourceTree = "<group>"; };
 		9D0959EA232D0E1200DC259A /* TrackBookPaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBookPaymentController.swift; sourceTree = "<group>"; };
-		9D0A175023278CD30051EF94 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D11030A231A8F000064004B /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D11030C231A8F850064004B /* DetailTrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTrackViewController.swift; sourceTree = "<group>"; };
 		9D11030E231B52EC0064004B /* CustomerNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerNavigationController.swift; sourceTree = "<group>"; };
@@ -282,6 +291,8 @@
 		9D3C3C6B2310321B0084823B /* FormSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSearchTableViewCell.swift; sourceTree = "<group>"; };
 		9D3C3C6D231032360084823B /* CountRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountRoomTableViewCell.swift; sourceTree = "<group>"; };
 		9D3C3C6F2310324C0084823B /* ListRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRoomTableViewCell.swift; sourceTree = "<group>"; };
+		9D548543233CA6A800D33A6F /* UpdateFullNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFullNameViewController.swift; sourceTree = "<group>"; };
+		9D548545233CA6CA00D33A6F /* UpdateUserInfoLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoLastViewController.swift; sourceTree = "<group>"; };
 		9D756FC6231E2BEE001084BB /* PromotionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCollectionCell.swift; sourceTree = "<group>"; };
 		9D756FC8231E3438001084BB /* DetailPromotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPromotionViewController.swift; sourceTree = "<group>"; };
 		9D756FCA231E3538001084BB /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +320,8 @@
 		9D8EB737231EB7A000D63EB8 /* ListRecieptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecieptViewController.swift; sourceTree = "<group>"; };
 		9D8EB739231EB7BC00D63EB8 /* DetailRecieptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecieptViewController.swift; sourceTree = "<group>"; };
 		9D8EB73C231EBCA700D63EB8 /* ListReceiptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTableViewCell.swift; sourceTree = "<group>"; };
+		9D9CCB8B2353823500D9EA55 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		9D9CCB8D235391FE00D9EA55 /* NewsHomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		9DC1A126232C418800937054 /* UserDetailMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailMenu.swift; sourceTree = "<group>"; };
 		9DD0A2AD232325CE0055C4F5 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9DD0A2AF232331320055C4F5 /* LangViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +356,10 @@
 		9DD91558230948FF00053D74 /* DetailNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNotificationController.swift; sourceTree = "<group>"; };
 		9DD9155A230949D900053D74 /* ListPromotionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPromotionController.swift; sourceTree = "<group>"; };
 		9DD9155C23094A0C00053D74 /* DetailPromotionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPromotionController.swift; sourceTree = "<group>"; };
+		9DEEA58623390D0900C90E49 /* VerifyIOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyIOTPViewController.swift; sourceTree = "<group>"; };
+		9DEEA588233921A300C90E49 /* UpdateUserInfoRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoRegisterViewController.swift; sourceTree = "<group>"; };
+		9DEEA58A2339413A00C90E49 /* flamingo-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "flamingo-app.entitlements"; sourceTree = "<group>"; };
+		9DEEA58D2339464C00C90E49 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A861251E02EB48724834C6A9 /* Pods-flamingo-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flamingo-app.release.xcconfig"; path = "Target Support Files/Pods-flamingo-app/Pods-flamingo-app.release.xcconfig"; sourceTree = "<group>"; };
 		AE0C16C9CD218345F1F2345D /* Pods_flamingo_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flamingo_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B46558F40A95D749D41DB05F /* Pods-flamingo-appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flamingo-appTests.debug.xcconfig"; path = "Target Support Files/Pods-flamingo-appTests/Pods-flamingo-appTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -556,6 +573,7 @@
 				9D756FDA231E8250001084BB /* TitleHomeTableViewCell.swift */,
 				9D756FDC231E826B001084BB /* NewsHomeTableViewCell.swift */,
 				9D34724823207BBE00D4FB0B /* GGMapTableViewCell.swift */,
+				9D9CCB8B2353823500D9EA55 /* NewsTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -571,6 +589,7 @@
 				9D01FE6023168B2200338A6F /* FlashSalesCollectionViewCell.swift */,
 				9D756FCF231E725B001084BB /* HeaderCustomerTableViewCell.swift */,
 				9D34724E2320C0B600D4FB0B /* ListSearchMapCollectionViewCell.swift */,
+				9D9CCB8D235391FE00D9EA55 /* NewsHomeCollectionViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -679,7 +698,8 @@
 		9DD915052307F9D600053D74 /* flamingo-app */ = {
 			isa = PBXGroup;
 			children = (
-				9D0A175023278CD30051EF94 /* GoogleService-Info.plist */,
+				9D01FEB523596F4100134B23 /* GoogleService-Info.plist */,
+				9DEEA58A2339413A00C90E49 /* flamingo-app.entitlements */,
 				9D35F779231343D20028A3DA /* Core */,
 				9D2B26AE23106288002C2C78 /* Libs */,
 				9DD915382307FE9000053D74 /* SupportFiles */,
@@ -767,6 +787,11 @@
 				9DC1A126232C418800937054 /* UserDetailMenu.swift */,
 				9D0959EA232D0E1200DC259A /* TrackBookPaymentController.swift */,
 				9D183906232F323300ECB887 /* OptionSecurityViewController.swift */,
+				9DEEA58623390D0900C90E49 /* VerifyIOTPViewController.swift */,
+				9DEEA588233921A300C90E49 /* UpdateUserInfoRegisterViewController.swift */,
+				9D548543233CA6A800D33A6F /* UpdateFullNameViewController.swift */,
+				9D548545233CA6CA00D33A6F /* UpdateUserInfoLastViewController.swift */,
+				9D021688235D5DF400BE06E4 /* RulesController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -799,6 +824,7 @@
 				9D01FE622316EE4200338A6F /* CheckBox.swift */,
 				9D34724C2320AB5E00D4FB0B /* Collection.swift */,
 				9D18E5F8232BE1B9003BCB54 /* UILabel.swift */,
+				9DEEA58D2339464C00C90E49 /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -954,7 +980,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DD915112307F9D700053D74 /* LaunchScreen.storyboard in Resources */,
-				9D0A175123278CD40051EF94 /* GoogleService-Info.plist in Resources */,
+				9D01FEB623596F4200134B23 /* GoogleService-Info.plist in Resources */,
 				9DD9150E2307F9D700053D74 /* Assets.xcassets in Resources */,
 				9DD9150C2307F9D600053D74 /* Main.storyboard in Resources */,
 			);
@@ -983,20 +1009,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-flamingo-app/Pods-flamingo-app-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-flamingo-app/Pods-flamingo-app-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-flamingo-app/Pods-flamingo-app-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1053,48 +1070,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-flamingo-app/Pods-flamingo-app-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework",
-				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
-				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Koyomi/Koyomi.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/SideMenuSwift/SideMenuSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/VisualEffectView/VisualEffectView.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-flamingo-app/Pods-flamingo-app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricAuthentication.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koyomi.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisualEffectView.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-flamingo-app/Pods-flamingo-app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1143,6 +1123,7 @@
 				9D897BF42322E74100C05780 /* ImageFullScreenViewController.swift in Sources */,
 				9D756FD2231E76D6001084BB /* HomePromotionCollectionViewCell.swift in Sources */,
 				8DA2C3572313D815009CDB54 /* AFHTTPRequestOperationManager.m in Sources */,
+				9DEEA58723390D0900C90E49 /* VerifyIOTPViewController.swift in Sources */,
 				9D756FD9231E7FC4001084BB /* NotificationTableViewCell.swift in Sources */,
 				9D34724F2320C0B600D4FB0B /* ListSearchMapCollectionViewCell.swift in Sources */,
 				9DD166782311601400D7292B /* BookModalViewController.swift in Sources */,
@@ -1158,6 +1139,7 @@
 				9D756FC9231E3438001084BB /* DetailPromotionViewController.swift in Sources */,
 				9D7E1646230D9D81002DAED7 /* Constants.swift in Sources */,
 				9D2CA92B230AB2D20057DDBA /* RegisterController.swift in Sources */,
+				9D548544233CA6A800D33A6F /* UpdateFullNameViewController.swift in Sources */,
 				9D110325231B690F0064004B /* CustomerPromotionViewController.swift in Sources */,
 				8DA2C35A2313D815009CDB54 /* AFNetworkReachabilityManager.m in Sources */,
 				9D11031D231B53BB0064004B /* ExampleHighlightableContentView.swift in Sources */,
@@ -1172,6 +1154,7 @@
 				9D8EB73A231EB7BC00D63EB8 /* DetailRecieptViewController.swift in Sources */,
 				9D2836FB2319929100650F75 /* DetailPayUtilitiesCollectionViewCell.swift in Sources */,
 				9D7E1656230F1D7F002DAED7 /* RecommendTableViewCell.swift in Sources */,
+				9DEEA58E2339464C00C90E49 /* Extensions.swift in Sources */,
 				9DD91555230948AF00053D74 /* IntroduceController.swift in Sources */,
 				9D18390A232F368700ECB887 /* NSObjectExtension.swift in Sources */,
 				8DA2C3562313D815009CDB54 /* AFURLSessionManager.m in Sources */,
@@ -1206,6 +1189,7 @@
 				9DD91551230946C100053D74 /* DetailSupportController.swift in Sources */,
 				9D18392C232FBD2600ECB887 /* CalendarDayCell.swift in Sources */,
 				9DD9155D23094A0C00053D74 /* DetailPromotionController.swift in Sources */,
+				9D548546233CA6CA00D33A6F /* UpdateUserInfoLastViewController.swift in Sources */,
 				9D11031B231B53BB0064004B /* ExampleAnimateTipsContentView.swift in Sources */,
 				9D7E1652230F1A40002DAED7 /* LastBookCollection.swift in Sources */,
 				9DD0A2B0232331320055C4F5 /* LangViewController.swift in Sources */,
@@ -1224,6 +1208,7 @@
 				9D2CA929230AB2AE0057DDBA /* LoginController.swift in Sources */,
 				9D34724D2320AB5E00D4FB0B /* Collection.swift in Sources */,
 				9D2B26B2231062A2002C2C78 /* SSRadioButton.swift in Sources */,
+				9D9CCB8C2353823500D9EA55 /* NewsTableViewCell.swift in Sources */,
 				9D01FE5F23168B0F00338A6F /* FlashSalesCollection.swift in Sources */,
 				9D01FE5B2316802900338A6F /* FlashSalesTableViewCell.swift in Sources */,
 				8DA2C3552313D815009CDB54 /* AFURLConnectionOperation.m in Sources */,
@@ -1252,6 +1237,7 @@
 				9D3C3C702310324C0084823B /* ListRoomTableViewCell.swift in Sources */,
 				9D2836FF2319A59F00650F75 /* PaymentInfoViewController.swift in Sources */,
 				9D2B26B623107AC9002C2C78 /* RoomDetailViewController.swift in Sources */,
+				9DEEA589233921A300C90E49 /* UpdateUserInfoRegisterViewController.swift in Sources */,
 				9DD915072307F9D600053D74 /* AppDelegate.swift in Sources */,
 				9D3472432320541700D4FB0B /* ListPromotionCustomerViewController.swift in Sources */,
 				8D508346230D8DFB00A314E7 /* HomeController.swift in Sources */,
@@ -1261,11 +1247,13 @@
 				9D8EB736231EA9D500D63EB8 /* DetailNewsViewController.swift in Sources */,
 				8DA2C35B2313D815009CDB54 /* AFSecurityPolicy.m in Sources */,
 				8DA2C3642313D824009CDB54 /* LocalizeHelper.m in Sources */,
+				9D021689235D5DF400BE06E4 /* RulesController.swift in Sources */,
 				9DD9154323081BD900053D74 /* PreferencesViewController.swift in Sources */,
 				8DA2C3532313D815009CDB54 /* AFURLResponseSerialization.m in Sources */,
 				9D183930232FBD2600ECB887 /* CalendarView+DataSource.swift in Sources */,
 				9D18392B232FBD2600ECB887 /* CalendarView+Extensions.swift in Sources */,
 				9D756FCB231E3538001084BB /* UserViewController.swift in Sources */,
+				9D9CCB8E235391FE00D9EA55 /* NewsHomeCollectionViewCell.swift in Sources */,
 				8DA2C36A2313D920009CDB54 /* Service.m in Sources */,
 				9DD9154B23087ED800053D74 /* CustomerController.swift in Sources */,
 			);
@@ -1443,8 +1431,10 @@
 			baseConfigurationReference = 1C275BEC808DAB270F91A6ED /* Pods-flamingo-app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "flamingo-app/flamingo-app.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U92ZR2UWY7;
 				INFOPLIST_FILE = "flamingo-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1452,6 +1442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"z\"",
@@ -1505,6 +1496,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "flamingo-app/Libs/Bridging-Header.h";
+				SWIFT_REFLECTION_METADATA_LEVEL = all;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1515,8 +1507,10 @@
 			baseConfigurationReference = A861251E02EB48724834C6A9 /* Pods-flamingo-app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "flamingo-app/flamingo-app.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U92ZR2UWY7;
 				INFOPLIST_FILE = "flamingo-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1524,6 +1518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"z\"",
@@ -1577,6 +1572,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "flamingo-app/Libs/Bridging-Header.h";
+				SWIFT_REFLECTION_METADATA_LEVEL = all;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

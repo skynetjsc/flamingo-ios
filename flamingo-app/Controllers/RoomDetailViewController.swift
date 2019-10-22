@@ -8,7 +8,6 @@
 
 import UIKit
 import VisualEffectView
-import Koyomi
 
 class RoomDetailViewController: BaseViewController {
 
@@ -23,7 +22,6 @@ class RoomDetailViewController: BaseViewController {
     @IBOutlet var viewParent: UIView!
     @IBOutlet weak var imageHeader: UIImageView!
     
-    @IBOutlet weak var koyomi: Koyomi!
     @IBOutlet weak var countRate: UILabel!
     @IBOutlet weak var tapViewLike: UIView!
     @IBOutlet weak var icon_like: UIImageView!
@@ -288,9 +286,13 @@ class RoomDetailViewController: BaseViewController {
     
     func getDetailRoom() {
         let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-
+        var username = ""
+        if currentUser["LoginName"] != nil {
+            username = currentUser["LoginName"] as! String
+        }
+        
         let params = [
-            "Username": currentUser["LoginName"],
+            "Username": username,
             "PropertyRoomID": self.PropertyRoomID!,
             "CheckInDate": self.valStartDate!,
             "CheckOutDate": self.valEndDate!
@@ -383,70 +385,95 @@ class RoomDetailViewController: BaseViewController {
     
     @objc func addFavorite(_ sender: UITapGestureRecognizer) {
 //        self.getDetailRoom()
-        if self.infoDetailRoom!["IsFavourite"] as! Int == 0 {
-            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        
+        let userInfo = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+        if userInfo["ID"] != nil {
             
-            let params = [
-                "UserName": currentUser["LoginName"],
-                "PropertyRoomID": self.PropertyRoomID,
-                "IsAdd": "True"
-                ] as [String : Any]
-            self.showProgress()
-            BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
-                self.hideProgress()
-                if status {
-                    if let _ = response["Data"] {
-                        
-                        DispatchQueue.main.async(execute: {
-                            if (response["Data"]!["Result"] as! Int == 1) {
-                                self.icon_like.image = UIImage(named: "heart_like")
-                                self.getDetailRoom()
-                            }
-                        })
-                        
-                        
-                    } else {
-                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
-                    }
-                } else {
-                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+            if self.infoDetailRoom!["IsFavourite"] as! Int == 0 {
+                let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                var username = ""
+                if currentUser["LoginName"] != nil {
+                    username = currentUser["LoginName"] as! String
                 }
-            }
-            
-        } else {
-            
-            let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
-            
-            let params = [
-                "UserName": currentUser["LoginName"],
-                "PropertyRoomID": self.PropertyRoomID,
-                "IsAdd": "False"
-                ] as [String : Any]
-            self.showProgress()
-            BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
-                self.hideProgress()
-                if status {
-                    print(response)
-                    if let _ = response["Data"] {
-                        
-                        DispatchQueue.main.async(execute: {
-                            if (response["Data"]!["Result"] as! Int == 1) {
-                                self.icon_like.image = UIImage(named: "heart_white")
-                                self.getDetailRoom()
-                            }
-
+                let params = [
+                    "UserName": username,
+                    "PropertyRoomID": self.PropertyRoomID,
+                    "IsAdd": "True"
+                    ] as [String : Any]
+                self.showProgress()
+                BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
+                    self.hideProgress()
+                    if status {
+                        if let _ = response["Data"] {
                             
-                        })
-                        
-                        
+                            DispatchQueue.main.async(execute: {
+                                if (response["Data"]!["Result"] as! Int == 1) {
+                                    self.icon_like.image = UIImage(named: "heart_like")
+                                    self.getDetailRoom()
+                                }
+                            })
+                            
+                            
+                        } else {
+                            self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        }
                     } else {
-                        self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
                     }
-                } else {
-                    self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                }
+                
+            } else {
+                
+                let currentUser = App.shared.getStringAnyObject(key: K_CURRENT_USER_INFO)
+                var username = ""
+                if currentUser["LoginName"] != nil {
+                    username = currentUser["LoginName"] as! String
+                }
+                let params = [
+                    "UserName": username,
+                    "PropertyRoomID": self.PropertyRoomID,
+                    "IsAdd": "False"
+                    ] as [String : Any]
+                self.showProgress()
+                BaseService.shared.addFavorite(params: params as [String : AnyObject]) { (status, response) in
+                    self.hideProgress()
+                    if status {
+                        print(response)
+                        if let _ = response["Data"] {
+                            
+                            DispatchQueue.main.async(execute: {
+                                if (response["Data"]!["Result"] as! Int == 1) {
+                                    self.icon_like.image = UIImage(named: "heart_white")
+                                    self.getDetailRoom()
+                                }
+
+                                
+                            })
+                            
+                            
+                        } else {
+                            self.showMessage(title: "Flamingo", message: (response["Message"] as? String)!)
+                        }
+                    } else {
+                        self.showMessage(title: "Flamingo", message: "Có lỗi xảy ra")
+                    }
                 }
             }
+        } else {
+            var refreshAlert = UIAlertController(title: "Thông báo", message: "Vui lòng đăng nhập/ đăng ký để sử dụng chức năng", preferredStyle: UIAlertController.Style.alert)
+                            
+                refreshAlert.addAction(UIAlertAction(title: "Đăng nhập", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Handle Ok logic here")
+                    self.performSegue(withIdentifier: "showLogin", sender: nil)
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Huỷ", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                present(refreshAlert, animated: true, completion: nil)
         }
+        
     }
     
     func setViewModal() {
@@ -534,7 +561,7 @@ class RoomDetailViewController: BaseViewController {
                 let color = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: offset)
                 self.navigationController?.navigationBar.tintColor = UIColor.gray
                 self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+//                UIApplication.shared.statusBarView?.backgroundColor = color
                 
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
                 self.navigationController?.navigationBar.barStyle = .default
@@ -546,7 +573,7 @@ class RoomDetailViewController: BaseViewController {
                 let color = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: offset)
                 self.navigationController?.navigationBar.tintColor = UIColor.white
                 self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+//                UIApplication.shared.statusBarView?.backgroundColor = color
                 
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
                 self.navigationController?.navigationBar.barStyle = .black
@@ -574,8 +601,8 @@ class RoomDetailViewController: BaseViewController {
             desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             desiredView.alpha = 1
         }, completion: { _ in
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = true
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = true
         })
         
         
@@ -587,8 +614,8 @@ class RoomDetailViewController: BaseViewController {
             desiredView.alpha = 0
         }) { _ in
             desiredView.removeFromSuperview()
-            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-            statusBar.isHidden = false
+//            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//            statusBar.isHidden = false
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
@@ -627,7 +654,7 @@ class RoomDetailViewController: BaseViewController {
         //                self.backgroundView.backgroundColor = color
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.barStyle = .black
     }
@@ -658,7 +685,7 @@ class RoomDetailViewController: BaseViewController {
         //                self.backgroundView.backgroundColor = color
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.barStyle = .black
         
@@ -670,7 +697,7 @@ class RoomDetailViewController: BaseViewController {
         let color = UIColor.init(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: CGFloat(offset))
         self.navigationController?.navigationBar.tintColor = UIColor.gray
         self.navigationController?.navigationBar.backgroundColor = color
-        UIApplication.shared.statusBarView?.backgroundColor = color
+//        UIApplication.shared.statusBarView?.backgroundColor = color
 
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         self.navigationController?.navigationBar.barStyle = .default
